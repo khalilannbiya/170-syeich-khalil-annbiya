@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Witness;
 use App\Models\Category;
 use App\Models\Evidence;
 use App\Models\ReportDivision;
@@ -45,5 +46,10 @@ class Report extends Model
     public function evidences(): HasMany
     {
         return $this->hasMany(Evidence::class);
+    }
+
+    public function witnesses(): HasMany
+    {
+        return $this->hasMany(Witness::class);
     }
 }
