@@ -148,7 +148,7 @@
                     masyarakat dalam melaporkan berbagai tindak kejahatan dan membangun lingkungan yang lebih aman di
                     wilayah Kabupaten Karawang.
                 </p>
-                <a href="#" aria-label="Menuju Halaman Tentang Kami"
+                <a href="{{ route('about-us') }}" aria-label="Menuju Halaman Tentang Kami"
                     class="px-4 py-3 text-sm font-medium text-white transition-all duration-500 ease-in-out bg-black border border-black rounded-lg hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-black">Lihat
                     Selengkapnya</a>
             </section>
@@ -169,11 +169,11 @@
 
                     {{-- Card Report --}}
                     @for ($i = 1; $i <= 3; $i++)
-                        @include('components.frontend.card-report')
+                        <x-frontend.card-report />
                     @endfor
                 </section>
                 <section class="flex justify-center items-center">
-                    <a href="#" aria-label="Menuju halaman lihat aduan publik"
+                    <a href="{{ route('public-report') }}" aria-label="Menuju halaman lihat aduan publik"
                         class="items-center justify-center px-4 gap-3 select-none bg-transparent py-3 text-center align-middle text-sm font-bold text-black hover:bg-black hover:text-white transition-all duration-500 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-[1.5px] border-black rounded-lg">
                         Lihat Selengkapnya
                     </a>
@@ -182,30 +182,3 @@
         </section>
     </section>
 @endsection
-
-@push('script')
-    <script>
-        // Text Elipsis via javascript
-        function shortenText(elementSelector, maxLength, elipsis) {
-            let elements = document.querySelectorAll(elementSelector);
-
-            elements.forEach(function(element) {
-                let textContent = element.textContent.trim();
-
-                if (textContent.length > maxLength) {
-                    if (elipsis) {
-                        let shortenedContent =
-                            textContent.substring(0, maxLength) + " ...";
-                        element.textContent = shortenedContent;
-                    } else {
-                        let shortenedContent = textContent.substring(0, maxLength);
-                        element.textContent = shortenedContent;
-                    }
-                }
-            });
-        }
-
-        shortenText("#report-title", 30, true);
-        shortenText("#report-description", 85, true)
-    </script>
-@endpush
