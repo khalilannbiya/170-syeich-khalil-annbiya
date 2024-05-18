@@ -17,7 +17,7 @@
         <p id="report-description"
             class="block text-base text-primary font-normal leading-relaxed text-inherit antialiased">
             Garis kejut di depan PKU Gamping menurut saya kurang nyaman dan bahaya, karena berada di
-            jalur cepat. Banyak yang tiba-tiba ...
+            jalur cepat. Banyak yang tiba-tiba
         </p>
     </div>
     <div class="p-6 pt-0 flex justify-between items-center">
@@ -29,3 +29,30 @@
         </a>
     </div>
 </article>
+
+@push('script')
+    <script>
+        // Text Elipsis via javascript
+        function shortenText(elementSelector, maxLength, elipsis) {
+            let elements = document.querySelectorAll(elementSelector);
+
+            elements.forEach(function(element) {
+                let textContent = element.textContent.trim();
+
+                if (textContent.length > maxLength) {
+                    if (elipsis) {
+                        let shortenedContent =
+                            textContent.substring(0, maxLength) + " ...";
+                        element.textContent = shortenedContent;
+                    } else {
+                        let shortenedContent = textContent.substring(0, maxLength);
+                        element.textContent = shortenedContent;
+                    }
+                }
+            });
+        }
+
+        shortenText("#report-title", 30, true);
+        shortenText("#report-description", 85, true)
+    </script>
+@endpush

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'pages.frontend.home')->name('index');
 Route::view('/about-us', 'pages.frontend.about-us')->name('about-us');
+Route::view('/public-report', 'pages.frontend.public')->name('public-report');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

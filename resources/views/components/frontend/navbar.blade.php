@@ -20,7 +20,9 @@
                         Kami</a>
                 </li>
                 <li>
-                    <a href="" class="transition-all duration-500 md:text-lg lg:text-sm">Laporan Publik</a>
+                    <a href="{{ route('public-report') }}"
+                        class="transition-all duration-500 md:text-lg lg:text-sm {{ Route::current()->getName() == 'public-report' ? 'text-deep-koamaru-900 lg:text-deep-koamaru-900' : 'text-black hover:text-deep-koamaru-900 lg:text-black lg:hover:text-deep-koamaru-900' }}">Laporan
+                        Publik</a>
                 </li>
 
                 {{-- Navlink mobile version --}}
