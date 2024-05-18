@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.slide {
+    right: 0 !important;
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.bg-gradient-hero {
+    background: rgb(98, 207, 244);
+    background: -moz-linear-gradient(90deg, rgba(98, 207, 244, 1) 0%, rgba(44, 103, 242, 1) 100%);
+    background: -webkit-linear-gradient(
+        90deg,
+        rgba(98, 207, 244, 1) 0%,
+        rgba(44, 103, 242, 1) 100%
+    );
+    background: linear-gradient(90deg, rgba(98, 207, 244, 1) 0%, rgba(44, 103, 242, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#62cff4",endColorstr="#2c67f2",GradientType=1);
+}
