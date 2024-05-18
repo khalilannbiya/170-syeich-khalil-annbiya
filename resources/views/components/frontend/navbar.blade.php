@@ -15,7 +15,8 @@
                         class="transition-all duration-500 md:text-lg lg:text-sm {{ Route::current()->getName() == 'index' ? 'text-deep-koamaru-900 lg:text-deep-koamaru-900' : 'text-black hover:text-deep-koamaru-900 lg:text-black lg:hover:text-deep-koamaru-900' }}">Beranda</a>
                 </li>
                 <li>
-                    <a href="" class="transition-all duration-500 md:text-lg lg:text-sm">Tentang
+                    <a href="{{ route('about-us') }}"
+                        class="transition-all duration-500 md:text-lg lg:text-sm {{ Route::current()->getName() == 'about-us' ? 'text-deep-koamaru-900 lg:text-deep-koamaru-900' : 'text-black hover:text-deep-koamaru-900 lg:text-black lg:hover:text-deep-koamaru-900' }}">Tentang
                         Kami</a>
                 </li>
                 <li>

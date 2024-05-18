@@ -10,7 +10,7 @@
                     <h5 class="text-lg text-black font-semibold mb-2 relative">
                         Lokasi
                     </h5>
-                    <a href="https://maps.app.goo.gl/cHoUQcbfsTSsDWAm7" class="hover:underline">
+                    <a href="https://maps.app.goo.gl/cHoUQcbfsTSsDWAm7" target="_blank" class="hover:underline">
                         <address class="text-[13px] text-black capitalize">
                             Jl. Surotokunto No.110, Kel. Warungbambu, Kec. Karawang Timur, Karawang, Jawa Barat 41371
                         </address>
