@@ -6,11 +6,11 @@
     <section class="pt-[60px] md:pt-[82px] flex items-center">
         <section
             class="bg-gradient-hero flex w-full justify-center items-center gap-6 h-[29rem] md:h-[26rem] lg:h-[29rem] py-10 px-2 md:px-10 lg:px-10 lg:py-10 rounded-xl">
-            <div class="max-w-7xl flex justify-center items-center gap-6 rounded-xl">
+            <div class="flex items-center justify-center gap-6 max-w-7xl rounded-xl">
                 <div class="self-start hidden lg:block">
                     <img class="w-64 xl:w-56" src="{{ asset('assets/icons/siren.webp') }}" alt="Icon Siren" loading="lazy">
                 </div>
-                <div class="flex flex-col justify-center items-center gap-6">
+                <div class="flex flex-col items-center justify-center gap-6">
                     <h1 class="text-[2.2rem] leading-tight text-white lg:text-5xl text-center font-semibold ">
                         Ciptakan Masyarakat Aman dan Nyaman
                     </h1>
@@ -31,17 +31,18 @@
             </div>
         </section>
     </section>
-    <section class="flex justify-center items-center py-24">
-        <section class="max-w-7xl flex flex-col justify-center items-center gap-20">
-            <section class="flex flex-col justify-center items-center gap-5">
-                <h1 class="text-4xl text-black text-center font-semibold">Keunggulan kami</h1>
+
+    <section class="flex items-center justify-center py-24">
+        <section class="flex flex-col items-center justify-center gap-20 max-w-7xl">
+            <section class="flex flex-col items-center justify-center gap-5">
+                <h1 class="text-4xl font-semibold text-center text-black">Keunggulan kami</h1>
                 <p class="text-center text-sm max-w-[20rem] sm:max-w-md lg:max-w-lg leading-normal text-slate-400">
                     Laporpak hadir sebagai solusi inovatif untuk membantu masyarakat dalam melaporkan tindak kejahatan dan
                     membangun lingkungan yang lebih aman.
                 </p>
             </section>
             <section class="w-full">
-                <ul class="flex justify-center items-center flex-wrap gap-16 lg:gap-10">
+                <ul class="flex flex-wrap items-center justify-center gap-16 lg:gap-10">
                     <li class="group w-[20rem] flex flex-col items-center justify-center gap-6 rounded-xl">
                         <div
                             class="group-hover:-translate-y-2 transition-all duration-500 ease-in-out bg-black border border-black p-5 rounded-[50%] group-hover:bg-slate-700">
@@ -53,8 +54,8 @@
                                 <path d="m11 13.586-1.793-1.793-1.414 1.414L11 16.414l5.207-5.207-1.414-1.414z"></path>
                             </svg>
                         </div>
-                        <div class="flex flex-col justify-center items-center text-center gap-3">
-                            <h2 class="text-2xl text-black font-medium">Kemudahan Pengaduan</h2>
+                        <div class="flex flex-col items-center justify-center gap-3 text-center">
+                            <h2 class="text-2xl font-medium text-black">Kemudahan Pengaduan</h2>
                             <p class="text-sm text-slate-400">Proses pelaporan yang sederhana dan mudah dimengerti
                             </p>
                         </div>
@@ -69,9 +70,10 @@
                                 </path>
                             </svg>
                         </div>
-                        <div class="flex flex-col justify-center items-center text-center gap-3">
-                            <h2 class="text-2xl text-black font-medium">Respon Cepat dan Tepat</h2>
-                            <p class="text-sm text-slate-400">Tim respons yang sigap dan profesional
+                        <div class="flex flex-col items-center justify-center gap-3 text-center">
+                            <h2 class="text-2xl font-medium text-black">Respon Cepat dan Tepat</h2>
+                            <p class="text-sm text-slate-400">Tim profesional yang berpengalaman dalam menangani berbagai
+                                kasus kejahatan
                             </p>
                         </div>
                     </li>
@@ -87,13 +89,123 @@
                                 <path d="M6 12h2v3H6zm10 0h2v3h-2z"></path>
                             </svg>
                         </div>
-                        <div class="flex flex-col justify-center items-center text-center gap-3">
-                            <h2 class="text-2xl text-black font-medium">Membangun Komunitas </h2>
-                            <p class="text-sm text-slate-400">Kerjasama dengan berbagai pihak</p>
+                        <div class="flex flex-col items-center justify-center gap-3 text-center">
+                            <h2 class="text-2xl font-medium text-black">Membangun Komunitas </h2>
+                            <p class="text-sm text-slate-400">Saling mengingatkan dan menjaga keamanan bersama</p>
                         </div>
                     </li>
                 </ul>
             </section>
         </section>
     </section>
+
+    <section class="py-24 mx-auto flex flex-col justify-center items-center bg-[#F4F8FB] rounded-xl">
+        <section class="max-w-7xl flex flex-col gap-20">
+            <section class="flex flex-col justify-center items-center gap-5">
+                <h1 class="text-4xl text-black font-semibold">Lacak Laporan</h1>
+                <p class="text-center text-sm max-w-[20rem] sm:max-w-md lg:max-w-lg leading-normal text-slate-400">
+                    Gunakan kode unik yang telah diberikan saat pelaporan untuk melacak status laporan Anda. Dengan ini,
+                    Anda
+                    dapat memantau perkembangan penanganan laporan secara transparan dan akurat
+                </p>
+            </section>
+            <form action="#" method="GET" class="w-full flex gap-2 md:gap-3">
+                <input type="text" name="keyword" id="default-search"
+                    class="w-full p-3 text-sm text-black placeholder:text-black border border-black rounded-lg bg-transparent focus:ring-black focus:border-black"
+                    placeholder="Masukan kode unik..." required />
+                <button type="submit" aria-label="Cari berdasarkan kode unik"
+                    class="text-white md:w-40 bg-black hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-black font-medium rounded-md text-sm px-4 py-2">Cari</button>
+            </form>
+        </section>
+    </section>
+
+    <section class="flex items-center justify-center mx-auto py-28">
+        <section class="flex flex-col items-center justify-center gap-10 px-4 max-w-7xl lg:flex-row md:gap-16">
+            <section class="grid gap-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <img loading="lazy"
+                            class="h-[12rem] w-[40rem] object-cover object-center rounded-lg hidden md:block"
+                            src="{{ asset('assets/images/aboutus-2.webp') }}" alt="Gambar Polisi">
+                    </div>
+                    <div>
+                        <img loading="lazy"
+                            class="h-[12rem] w-[40rem] object-cover object-center rounded-lg hidden md:block"
+                            src="{{ asset('assets/images/aboutus-3.webp') }}" alt="Gambar Polisi">
+                    </div>
+                </div>
+                <div>
+                    <img loading="lazy"
+                        class="h-[12rem] w-full lg:w-[40rem] object-cover object-center block md:hidden lg:block rounded-lg"
+                        src="{{ asset('assets/images/aboutus-1.webp') }}" alt="Gambar Polisi">
+                </div>
+            </section>
+            <section class="flex flex-col items-center justify-center gap-5 lg:items-start md:gap-10">
+                <h1 class="text-4xl font-semibold text-center text-black lg:text-left">Tentang Kami</h1>
+                <p class="text-sm leading-normal text-center lg:text-left text-slate-400">
+                    Laporpak merupakan sistem informasi pengaduan masyarakat yang diinisiasi oleh Kepolisian Resor Kabupaten
+                    Karawang. Sistem ini hadir sebagai platform digital yang mudah diakses dan terpercaya untuk membantu
+                    masyarakat dalam melaporkan berbagai tindak kejahatan dan membangun lingkungan yang lebih aman di
+                    wilayah Kabupaten Karawang.
+                </p>
+                <a href="#" aria-label="Menuju Halaman Tentang Kami"
+                    class="px-4 py-3 text-sm font-medium text-white transition-all duration-500 ease-in-out bg-black border border-black rounded-lg hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-black">Lihat
+                    Selengkapnya</a>
+            </section>
+        </section>
+    </section>
+
+    <section class="py-24 mx-auto flex flex-col justify-center items-center bg-[#F4F8FB] rounded-xl">
+        <section class="max-w-7xl flex flex-col gap-20">
+            <section class="flex flex-col justify-center items-center gap-5">
+                <h1 class="text-4xl text-black font-semibold">Aduan Terbaru</h1>
+                <p class="text-center text-sm max-w-[20rem] sm:max-w-md lg:max-w-lg leading-normal text-slate-400">
+                    Laporpak senantiasa berkomitmen untuk memberikan pelayanan terbaik kepada masyarakat dalam hal pengaduan
+                    tindak kejahatan.
+                </p>
+            </section>
+            <section class="flex flex-col justify-center items-center gap-6">
+                <section class="w-full md:py-6 flex flex-wrap justify-center items-center gap-3 md:gap-4">
+
+                    {{-- Card Report --}}
+                    @for ($i = 1; $i <= 3; $i++)
+                        @include('components.frontend.card-report')
+                    @endfor
+                </section>
+                <section class="flex justify-center items-center">
+                    <a href="#" aria-label="Menuju halaman lihat aduan publik"
+                        class="items-center justify-center px-4 gap-3 select-none bg-transparent py-3 text-center align-middle text-sm font-bold text-black hover:bg-black hover:text-white transition-all duration-500 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-[1.5px] border-black rounded-lg">
+                        Lihat Selengkapnya
+                    </a>
+                </section>
+            </section>
+        </section>
+    </section>
 @endsection
+
+@push('script')
+    <script>
+        // Text Elipsis via javascript
+        function shortenText(elementSelector, maxLength, elipsis) {
+            let elements = document.querySelectorAll(elementSelector);
+
+            elements.forEach(function(element) {
+                let textContent = element.textContent.trim();
+
+                if (textContent.length > maxLength) {
+                    if (elipsis) {
+                        let shortenedContent =
+                            textContent.substring(0, maxLength) + " ...";
+                        element.textContent = shortenedContent;
+                    } else {
+                        let shortenedContent = textContent.substring(0, maxLength);
+                        element.textContent = shortenedContent;
+                    }
+                }
+            });
+        }
+
+        shortenText("#report-title", 30, true);
+        shortenText("#report-description", 85, true)
+    </script>
+@endpush
