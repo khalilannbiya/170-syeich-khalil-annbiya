@@ -1,9 +1,7 @@
-@extends('layouts.frontend')
+<x-layouts.frontend>
+    <x-slot:title>Tentang Kami | </x-slot:title>
 
-@section('title', 'Tentang Kami | ')
-
-@section('content')
-    <x-frontend.banner>
+    <x-partials.frontend.banner>
         <x-slot:title>Tentang Kami</x-slot:title>
         <li class="inline-flex items-center">
             <a href="{{ route('index') }}" aria-label="Kembali Ke Halaman Beranda"
@@ -26,7 +24,7 @@
                 <span class="ms-1 text-sm font-medium text-slate-300 md:ms-2">Tentang Kami</span>
             </div>
         </li>
-    </x-frontend.banner>
+    </x-partials.frontend.banner>
 
     <section class="max-w-7xl mx-auto flex justify-center md:mt-20 py-24 px-4">
         <section class="flex flex-col lg:flex-row justify-between items-center gap-10">
@@ -36,7 +34,8 @@
             </div>
             <div class="w-full md:max-w-xl">
                 <p class="text-sm text-gray-500 text-justify">
-                    Laporpak merupakan sistem informasi pengaduan masyarakat yang diinisiasi oleh Kepolisian Resor Kabupaten
+                    Laporpak merupakan sistem informasi pengaduan masyarakat yang diinisiasi oleh Kepolisian Resor
+                    Kabupaten
                     Karawang. Sistem ini hadir sebagai platform digital yang mudah diakses dan terpercaya untuk membantu
                     masyarakat dalam melaporkan berbagai tindak kejahatan dan membangun lingkungan yang lebih aman di
                     wilayah Kabupaten Karawang.
@@ -66,12 +65,12 @@
                 loading="lazy" />
             <img class="w-[3rem] md:w-[5rem]" src="{{ asset('assets/images/logo-propam.webp') }}" alt="Logo propam"
                 loading="lazy" />
-            <img class="w-[3rem] md:w-[5rem]" src="{{ asset('assets/images/logo-sat-binmas.webp') }}" alt="Logo Sat Binmas"
-                loading="lazy" />
+            <img class="w-[3rem] md:w-[5rem]" src="{{ asset('assets/images/logo-sat-binmas.webp') }}"
+                alt="Logo Sat Binmas" loading="lazy" />
             <img class="w-[3rem] md:w-[5rem]" src="{{ asset('assets/images/logo-sat-intelkam.webp') }}"
                 alt="Logo Sat intelkam" loading="lazy" />
-            <img class="w-[3rem] md:w-[5rem]" src="{{ asset('assets/images/logo-sat-lantas.webp') }}" alt="Logo Sat lantas"
-                loading="lazy" />
+            <img class="w-[3rem] md:w-[5rem]" src="{{ asset('assets/images/logo-sat-lantas.webp') }}"
+                alt="Logo Sat lantas" loading="lazy" />
             <img class="w-[3rem] md:w-[5rem]" src="{{ asset('assets/images/logo-sat-pamobvit.webp') }}"
                 alt="Logo Sat pamobvit" loading="lazy" />
             <img class="w-[3rem] md:w-[5rem]" src="{{ asset('assets/images/logo-sat-reskrim.webp') }}"
@@ -80,10 +79,10 @@
                 alt="Logo Sat resnarkoba" loading="lazy" />
             <img class="w-[3rem] md:w-[5rem]" src="{{ asset('assets/images/logo-sat-sabhara.webp') }}"
                 alt="Logo Sat sabhara" loading="lazy" />
-            <img class="w-[3rem] md:w-[5rem]" src="{{ asset('assets/images/logo-sat-tahti.webp') }}" alt="Logo Sat tahti"
-                loading="lazy" />
-            <img class="w-[3rem] md:w-[5rem]" src="{{ asset('assets/images/logo-sat-tipol.webp') }}" alt="Logo Sat tipol"
-                loading="lazy" />
+            <img class="w-[3rem] md:w-[5rem]" src="{{ asset('assets/images/logo-sat-tahti.webp') }}"
+                alt="Logo Sat tahti" loading="lazy" />
+            <img class="w-[3rem] md:w-[5rem]" src="{{ asset('assets/images/logo-sat-tipol.webp') }}"
+                alt="Logo Sat tipol" loading="lazy" />
             <img class="w-[3rem] md:w-[5rem]" src="{{ asset('assets/images/logo-spkt.webp') }}" alt="Logo SPKT"
                 loading="lazy" />
         </section>
@@ -96,4 +95,4 @@
             width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"></iframe>
     </section>
-@endsection
+</x-layouts.frontend>

@@ -1,8 +1,4 @@
-@extends('layouts.frontend')
-
-@section('title', 'Beranda | ')
-
-@section('content')
+<x-layouts.frontend>
     <section class="pt-[60px] md:pt-[82px] flex items-center">
         <section
             class="bg-gradient-hero flex w-full justify-center items-center gap-6 h-[29rem] md:h-[26rem] lg:h-[29rem] py-10 px-2 md:px-10 lg:px-10 lg:py-10 rounded-xl">
@@ -25,8 +21,8 @@
                     </a>
                 </div>
                 <div class="self-end hidden lg:block">
-                    <img class="w-64 xl:w-56" src="{{ asset('assets/icons/police-car-icon.webp') }}" alt="Icon Police Car"
-                        loading="lazy">
+                    <img class="w-64 xl:w-56" src="{{ asset('assets/icons/police-car-icon.webp') }}"
+                        alt="Icon Police Car" loading="lazy">
                 </div>
             </div>
         </section>
@@ -37,7 +33,8 @@
             <section class="flex flex-col items-center justify-center gap-5">
                 <h1 class="text-4xl font-semibold text-center text-black">Keunggulan kami</h1>
                 <p class="text-center text-sm max-w-[20rem] sm:max-w-md lg:max-w-lg leading-normal text-slate-400">
-                    Laporpak hadir sebagai solusi inovatif untuk membantu masyarakat dalam melaporkan tindak kejahatan dan
+                    Laporpak hadir sebagai solusi inovatif untuk membantu masyarakat dalam melaporkan tindak kejahatan
+                    dan
                     membangun lingkungan yang lebih aman.
                 </p>
             </section>
@@ -72,7 +69,8 @@
                         </div>
                         <div class="flex flex-col items-center justify-center gap-3 text-center">
                             <h2 class="text-2xl font-medium text-black">Respon Cepat dan Tepat</h2>
-                            <p class="text-sm text-slate-400">Tim profesional yang berpengalaman dalam menangani berbagai
+                            <p class="text-sm text-slate-400">Tim profesional yang berpengalaman dalam menangani
+                                berbagai
                                 kasus kejahatan
                             </p>
                         </div>
@@ -143,7 +141,8 @@
             <section class="flex flex-col items-center justify-center gap-5 lg:items-start md:gap-10">
                 <h1 class="text-4xl font-semibold text-center text-black lg:text-left">Tentang Kami</h1>
                 <p class="text-sm leading-normal text-center lg:text-left text-slate-400">
-                    Laporpak merupakan sistem informasi pengaduan masyarakat yang diinisiasi oleh Kepolisian Resor Kabupaten
+                    Laporpak merupakan sistem informasi pengaduan masyarakat yang diinisiasi oleh Kepolisian Resor
+                    Kabupaten
                     Karawang. Sistem ini hadir sebagai platform digital yang mudah diakses dan terpercaya untuk membantu
                     masyarakat dalam melaporkan berbagai tindak kejahatan dan membangun lingkungan yang lebih aman di
                     wilayah Kabupaten Karawang.
@@ -160,7 +159,8 @@
             <section class="flex flex-col justify-center items-center gap-5">
                 <h1 class="text-4xl text-black font-semibold">Aduan Terbaru</h1>
                 <p class="text-center text-sm max-w-[20rem] sm:max-w-md lg:max-w-lg leading-normal text-slate-400">
-                    Laporpak senantiasa berkomitmen untuk memberikan pelayanan terbaik kepada masyarakat dalam hal pengaduan
+                    Laporpak senantiasa berkomitmen untuk memberikan pelayanan terbaik kepada masyarakat dalam hal
+                    pengaduan
                     tindak kejahatan.
                 </p>
             </section>
@@ -169,7 +169,7 @@
 
                     {{-- Card Report --}}
                     @for ($i = 1; $i <= 3; $i++)
-                        <x-frontend.card-report />
+                        <x-partials.frontend.card-report />
                     @endfor
                 </section>
                 <section class="flex justify-center items-center">
@@ -181,4 +181,4 @@
             </section>
         </section>
     </section>
-@endsection
+</x-layouts.frontend>
