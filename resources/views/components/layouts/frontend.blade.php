@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    @include('components.frontend.meta')
+    <x-partials.frontend.meta />
 
     {{-- Favicon --}}
     <link rel="icon" type="image/png" href="{{ asset('assets/images/logo-thumb.jpeg') }}" />
@@ -19,7 +19,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     {{-- Title --}}
-    <title>@yield('title', '')Laporpak — Melawan Kejahatan Bersama</title>
+    <title>{{ $title ?? '' }} Laporpak — Melawan Kejahatan Bersama</title>
 
     <link rel="canonical" href="{{ URL::current() }}">
 
@@ -30,15 +30,15 @@
     @include('sweetalert::alert')
 
     {{-- Header --}}
-    @include('components.frontend.navbar')
+    <x-partials.frontend.navbar />
 
     {{-- Main Content --}}
     <main class="px-4 mx-auto">
-        @yield('content')
+        {{ $slot }}
     </main>
 
     {{-- Footer --}}
-    @include('components.frontend.footer')
+    <x-partials.frontend.footer />
 
     @vite('resources/js/app.js')
     @stack('script')

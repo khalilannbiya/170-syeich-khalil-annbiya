@@ -3,9 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'pages.frontend.home')->name('index');
-Route::view('/about-us', 'pages.frontend.about-us')->name('about-us');
-Route::view('/public-report', 'pages.frontend.public')->name('public-report');
+Route::view('/', 'components.pages.frontend.home')->name('index');
+Route::view('/about-us', 'components.pages.frontend.about-us')->name('about-us');
+Route::view('/public-report', 'components.pages.frontend.public-reports')->name('public-report');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

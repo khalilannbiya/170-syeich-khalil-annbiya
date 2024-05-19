@@ -1,9 +1,7 @@
-@extends('layouts.frontend')
+<x-layouts.frontend>
+    <x-slot:title>Laporan Publik | </x-slot:title>
 
-@section('title', 'Laporan Publik | ')
-
-@section('content')
-    <x-frontend.banner>
+    <x-partials.frontend.banner>
         <x-slot:title>Laporan Publik</x-slot:title>
         <li class="inline-flex items-center">
             <a href="{{ route('index') }}" aria-label="Kembali Ke Halaman Beranda"
@@ -26,15 +24,15 @@
                 <span class="ms-1 text-sm font-medium text-slate-300 md:ms-2">Laporan Publik</span>
             </div>
         </li>
-    </x-frontend.banner>
+    </x-partials.frontend.banner>
 
     <section class="flex flex-col justify-center items-center gap-6">
         <section class="w-full md:py-6 flex flex-wrap justify-center items-center gap-3 md:gap-4">
 
             {{-- Card Report --}}
             @for ($i = 1; $i <= 5; $i++)
-                <x-frontend.card-report />
+                <x-partials.frontend.card-report />
             @endfor
         </section>
     </section>
-@endsection
+</x-layouts.frontend>
