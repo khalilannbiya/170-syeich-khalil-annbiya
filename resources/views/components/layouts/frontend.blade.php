@@ -26,7 +26,7 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="relative antialiased font-montserrat">
+<body class="relative antialiased font-montserrat text-black">
     @include('sweetalert::alert')
 
     {{-- Header --}}
