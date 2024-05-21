@@ -27,7 +27,7 @@
     </x-partials.frontend.banner>
 
     <section class="flex flex-col justify-center items-center gap-6">
-        <section class="w-full md:py-6 flex flex-wrap justify-center items-center gap-3 md:gap-4">
+        <section class="w-full max-w-7xl md:py-6 flex flex-wrap justify-center items-center gap-3 md:gap-4">
 
             {{-- Card Report --}}
             @for ($i = 1; $i <= 5; $i++)
