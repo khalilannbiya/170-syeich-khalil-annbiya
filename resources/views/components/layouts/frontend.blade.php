@@ -26,7 +26,7 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="relative antialiased font-montserrat text-black">
+<body class="relative antialiased text-black font-montserrat">
     @include('sweetalert::alert')
 
     {{-- Header --}}
@@ -41,6 +41,7 @@
     <x-partials.frontend.footer />
 
     @vite('resources/js/app.js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     @stack('script')
 </body>
 
