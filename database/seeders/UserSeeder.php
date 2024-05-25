@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
         $user->id = 3;
         $user->role_id = 3;
         $user->name = 'Indra Frimawan';
-        $user->email = 'indrafri@gmailcom';
+        $user->email = 'indrafri@gmail.com';
         $user->password = Hash::make('Rahasia123#');
         $user->phone = '+6281234567890';
         $user->address = 'Jl. Jalan Jalan No. 345';
