@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\Auth\LoginRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -16,7 +17,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        return view('components.pages.auth.login');
     }
 
     /**
@@ -28,7 +29,17 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        Alert::toast('Anda berhasil login', 'success');
+
+        $user = Auth::user();
+
+        // If user is admin or unit admin, redirect to dashboard
+        if ($user->role_id == 1 || $user->role_id == 2) {
+            return redirect(route('dashboard', absolute: false));
+        } else {
+            // If user is not admin or unit admin, redirect to index
+            return redirect(route('index', absolute: false));
+        }
     }
 
     /**
@@ -42,6 +53,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
+        Alert::toast('Anda berhasil logout', 'success');
         return redirect('/');
     }
 }
