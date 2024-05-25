@@ -26,19 +26,22 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="relative antialiased text-black font-montserrat">
+<body class="relative antialiased text-black bg-white font-montserrat">
     @include('sweetalert::alert')
 
-    {{-- Header --}}
-    <x-partials.frontend.navbar />
-
     {{-- Main Content --}}
-    <main class="px-4 mx-auto">
-        {{ $slot }}
+    <main class="px-4 mx-auto py-10 lg:py-0 lg:px-0">
+        <img src="{{ asset('assets/images/logo.webp') }}" class="w-28 lg:hidden" alt="Logo Laporpak">
+
+        <section class="max-w-max mx-auto lg:flex lg:flex-row lg:w-full">
+            <section class="hidden lg:basis-1/2 lg:overflow-hidden lg:flex lg:flex-col lg:justify-between">
+                <img class="w-full h-full object-cover object-center" src="{{ asset('assets/images/siren.webp') }}"
+                    alt="Gambar Polisi">
+            </section>
+            {{ $slot }}
+        </section>
     </main>
 
-    {{-- Footer --}}
-    <x-partials.frontend.footer />
 
     @vite('resources/js/app.js')
     @stack('script')

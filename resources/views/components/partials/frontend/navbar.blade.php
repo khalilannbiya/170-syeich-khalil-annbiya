@@ -44,16 +44,16 @@
 
             {{-- Navlink desktop version --}}
             <div class="w-1/3 lg:w-[30%] hidden  lg:flex gap-2">
-                <button
+                <a href="{{ route('register') }}"
                     class="px-6 py-3 bg-transparent hover:text-white hover:bg-slate-700 border border-black
                     focus:ring-4 focus:outline-none focus:ring-black transition-all duration-500 ease-in-out font-medium
                     text-sm rounded">
                     Daftar
-                </button>
-                <button
+                </a>
+                <a href="{{ route('login') }}"
                     class="text-white px-8 py-3 bg-black hover:bg-slate-700 border border-black focus:ring-4 focus:outline-none focus:ring-black transition-all duration-500 ease-in-out font-medium text-sm rounded">
                     Masuk
-                </button>
+                </a>
             </div>
             <div class="absolute z-30 cursor-pointer right-4 md:right-4 lg:hidden" id="toggle">
                 <svg xmlns="http://www.w3.org/2000/svg" id="iconToggle"
