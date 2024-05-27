@@ -18,6 +18,8 @@ class Report extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'user_id',
+        'category_id',
         'title',
         'description',
         'location',
@@ -26,6 +28,7 @@ class Report extends Model
         'unic_code',
         'is_private',
         'is_anonymous',
+        'slug'
     ];
 
     public function user(): BelongsTo

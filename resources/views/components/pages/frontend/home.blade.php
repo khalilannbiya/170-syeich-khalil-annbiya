@@ -15,7 +15,7 @@
                         masyarakat yang mudah diakses, terpercaya, dan responsif, untuk membantu Anda melawan tindak
                         kejahatan dan membangun lingkungan yang lebih aman.
                     </p>
-                    <a href="#" aria-label="Menuju Halaman Buat Laporan"
+                    <a href="{{ route('reporter.reports.create') }}" aria-label="Menuju Halaman Buat Laporan"
                         class="flex w-[10rem] items-center justify-center px-4 gap-3 md:mt-4 select-none bg-black py-3 text-center align-middle text-sm font-bold text-white hover:bg-slate-700 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-[1.5px] border-black rounded-lg">
                         Ayo Melapor
                     </a>

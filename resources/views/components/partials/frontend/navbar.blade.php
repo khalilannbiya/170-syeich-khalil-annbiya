@@ -14,46 +14,96 @@
                     <a href="{{ route('index') }}"
                         class="transition-all duration-500 md:text-lg lg:text-sm {{ Route::current()->getName() == 'index' ? 'text-deep-koamaru-900 lg:text-deep-koamaru-900' : 'text-black hover:text-deep-koamaru-900 lg:text-black lg:hover:text-deep-koamaru-900' }}">Beranda</a>
                 </li>
-                <li>
-                    <a href="{{ route('about-us') }}"
-                        class="transition-all duration-500 md:text-lg lg:text-sm {{ Route::current()->getName() == 'about-us' ? 'text-deep-koamaru-900 lg:text-deep-koamaru-900' : 'text-black hover:text-deep-koamaru-900 lg:text-black lg:hover:text-deep-koamaru-900' }}">Tentang
-                        Kami</a>
-                </li>
-                <li>
-                    <a href="{{ route('public-report') }}"
-                        class="transition-all duration-500 md:text-lg lg:text-sm {{ Route::current()->getName() == 'public-report' ? 'text-deep-koamaru-900 lg:text-deep-koamaru-900' : 'text-black hover:text-deep-koamaru-900 lg:text-black lg:hover:text-deep-koamaru-900' }}">Laporan
-                        Publik</a>
-                </li>
 
-                {{-- Navlink mobile version --}}
-                <li class="block lg:hidden">
-                    <a href="{{ route('register') }}"
-                        class="px-6 py-3 bg-transparent hover:text-white hover:bg-slate-700 border border-black focus:ring-4 focus:outline-none focus:ring-black transition-all duration-500 ease-in-out font-medium text-sm rounded">
-                        Daftar
-                    </a>
-                </li>
+                {{-- if user is reporter --}}
+                @if (auth()->check() && auth()->user()->role->name == 'Reporter')
+                    <li>
+                        <a href="{{ route('reporter.reports.create') }}"
+                            class="transition-all duration-500 md:text-lg lg:text-sm {{ Route::current()->getName() == 'reporter.reports.create' ? 'text-deep-koamaru-900 lg:text-deep-koamaru-900' : 'text-black hover:text-deep-koamaru-900 lg:text-black lg:hover:text-deep-koamaru-900' }}">Buat
+                            Aduan</a>
+                    </li>
 
-                {{-- Navlink mobile version --}}
-                <li class="block lg:hidden">
-                    <a href="{{ route('login') }}"
-                        class="text-white px-8 py-3 bg-black hover:bg-slate-700 border border-black focus:ring-4 focus:outline-none focus:ring-black transition-all duration-500 ease-in-out font-medium text-sm rounded">
-                        Masuk
-                    </a>
-                </li>
+                    {{-- Navlink mobile version --}}
+                    <li class="block lg:hidden">
+                        <a href="{{ route('profile.edit') }}"
+                            class="px-6 py-3 bg-transparent hover:text-white hover:bg-slate-700 border border-black focus:ring-4 focus:outline-none focus:ring-black transition-all duration-500 ease-in-out font-medium text-sm rounded">
+                            Profile
+                        </a>
+                    </li>
+
+                    {{-- Navlink mobile version --}}
+                    <li class="block lg:hidden">
+                        <a href="{{ route('logout') }}"
+                            class="text-white px-8 py-3 bg-black hover:bg-slate-700 border border-black focus:ring-4 focus:outline-none focus:ring-black transition-all duration-500 ease-in-out font-medium text-sm rounded">
+                            Logout
+                        </a>
+                    </li>
+                @endif
+
+                {{-- if user is not logged in --}}
+                @guest
+                    <li>
+                        <a href="{{ route('about-us') }}"
+                            class="transition-all duration-500 md:text-lg lg:text-sm {{ Route::current()->getName() == 'about-us' ? 'text-deep-koamaru-900 lg:text-deep-koamaru-900' : 'text-black hover:text-deep-koamaru-900 lg:text-black lg:hover:text-deep-koamaru-900' }}">Tentang
+                            Kami</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('public-report') }}"
+                            class="transition-all duration-500 md:text-lg lg:text-sm {{ Route::current()->getName() == 'public-report' ? 'text-deep-koamaru-900 lg:text-deep-koamaru-900' : 'text-black hover:text-deep-koamaru-900 lg:text-black lg:hover:text-deep-koamaru-900' }}">Laporan
+                            Publik</a>
+                    </li>
+
+                    {{-- Navlink mobile version --}}
+                    <li class="block lg:hidden">
+                        <a href="{{ route('register') }}"
+                            class="px-6 py-3 bg-transparent hover:text-white hover:bg-slate-700 border border-black focus:ring-4 focus:outline-none focus:ring-black transition-all duration-500 ease-in-out font-medium text-sm rounded">
+                            Daftar
+                        </a>
+                    </li>
+
+                    {{-- Navlink mobile version --}}
+                    <li class="block lg:hidden">
+                        <a href="{{ route('login') }}"
+                            class="text-white px-8 py-3 bg-black hover:bg-slate-700 border border-black focus:ring-4 focus:outline-none focus:ring-black transition-all duration-500 ease-in-out font-medium text-sm rounded">
+                            Masuk
+                        </a>
+                    </li>
+                @endguest
             </ul>
 
             {{-- Navlink desktop version --}}
             <div class="w-1/3 lg:w-[30%] hidden  lg:flex gap-2">
-                <a href="{{ route('register') }}"
-                    class="px-6 py-3 bg-transparent hover:text-white hover:bg-slate-700 border border-black
+
+                {{-- if user is reporter --}}
+                @if (auth()->check() && auth()->user()->role->name == 'Reporter')
+                    <a href="{{ route('profile.edit') }}"
+                        class="px-6 py-3 bg-transparent hover:text-white hover:bg-slate-700 border border-black
                     focus:ring-4 focus:outline-none focus:ring-black transition-all duration-500 ease-in-out font-medium
                     text-sm rounded">
-                    Daftar
-                </a>
-                <a href="{{ route('login') }}"
-                    class="text-white px-8 py-3 bg-black hover:bg-slate-700 border border-black focus:ring-4 focus:outline-none focus:ring-black transition-all duration-500 ease-in-out font-medium text-sm rounded">
-                    Masuk
-                </a>
+                        Profile
+                    </a>
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <button type="submit"
+                            class="text-white px-8 py-3 bg-black hover:bg-slate-700 border border-black focus:ring-4 focus:outline-none focus:ring-black transition-all duration-500 ease-in-out font-medium text-sm rounded">Logout</button>
+                    </form>
+                @endif
+
+                {{-- if user is not logged in --}}
+                @guest
+                    <a href="{{ route('register') }}"
+                        class="px-6 py-3 bg-transparent hover:text-white hover:bg-slate-700 border border-black
+                focus:ring-4 focus:outline-none focus:ring-black transition-all duration-500 ease-in-out font-medium
+                text-sm rounded">
+                        Daftar
+                    </a>
+                    <a href="{{ route('login') }}"
+                        class="text-white px-8 py-3 bg-black hover:bg-slate-700 border border-black focus:ring-4 focus:outline-none focus:ring-black transition-all duration-500 ease-in-out font-medium text-sm rounded">
+                        Masuk
+                    </a>
+                @endguest
+
             </div>
             <div class="absolute z-30 cursor-pointer right-4 md:right-4 lg:hidden" id="toggle">
                 <svg xmlns="http://www.w3.org/2000/svg" id="iconToggle"
