@@ -98,21 +98,21 @@
     </section>
 
     <section class="py-24 mx-auto flex flex-col justify-center items-center bg-[#F4F8FB] rounded-xl">
-        <section class="max-w-7xl flex flex-col gap-20">
-            <section class="flex flex-col justify-center items-center gap-5">
-                <h1 class="text-4xl text-black font-semibold">Lacak Laporan</h1>
+        <section class="flex flex-col gap-20 max-w-7xl">
+            <section class="flex flex-col items-center justify-center gap-5">
+                <h1 class="text-4xl font-semibold text-black">Lacak Laporan</h1>
                 <p class="text-center text-sm max-w-[20rem] sm:max-w-md lg:max-w-lg leading-normal text-slate-400">
                     Gunakan kode unik yang telah diberikan saat pelaporan untuk melacak status laporan Anda. Dengan ini,
                     Anda
                     dapat memantau perkembangan penanganan laporan secara transparan dan akurat
                 </p>
             </section>
-            <form action="#" method="GET" class="w-full flex gap-2 md:gap-3">
+            <form action="{{ route('show-public-report-detail') }}" method="GET" class="flex w-full gap-2 md:gap-3">
                 <input type="text" name="keyword" id="default-search"
-                    class="w-full p-3 text-sm text-black placeholder:text-black border border-black rounded-lg bg-transparent focus:ring-black focus:border-black"
+                    class="w-full p-3 text-sm text-black bg-transparent border border-black rounded-lg placeholder:text-black focus:ring-black focus:border-black"
                     placeholder="Masukan kode unik..." required />
                 <button type="submit" aria-label="Cari berdasarkan kode unik"
-                    class="text-white md:w-40 bg-black hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-black font-medium rounded-md text-sm px-4 py-2">Cari</button>
+                    class="px-4 py-2 text-sm font-medium text-white bg-black rounded-md md:w-40 hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-black">Cari</button>
             </form>
         </section>
     </section>
@@ -155,24 +155,31 @@
     </section>
 
     <section class="py-24 mx-auto flex flex-col justify-center items-center bg-[#F4F8FB] rounded-xl">
-        <section class="max-w-7xl flex flex-col gap-20">
-            <section class="flex flex-col justify-center items-center gap-5">
-                <h1 class="text-4xl text-black font-semibold">Aduan Terbaru</h1>
+        <section class="flex flex-col w-full gap-20">
+            <section class="flex flex-col items-center justify-center gap-5">
+                <h1 class="text-4xl font-semibold text-black">Aduan Terbaru</h1>
                 <p class="text-center text-sm max-w-[20rem] sm:max-w-md lg:max-w-lg leading-normal text-slate-400">
                     Laporpak senantiasa berkomitmen untuk memberikan pelayanan terbaik kepada masyarakat dalam hal
                     pengaduan
                     tindak kejahatan.
                 </p>
             </section>
-            <section class="flex flex-col justify-center items-center gap-6">
-                <section class="w-full md:py-6 flex flex-wrap justify-center items-center gap-3 md:gap-4">
-
+            <section class="flex flex-col items-center justify-center gap-6">
+                <section class="flex flex-wrap items-center justify-center w-full gap-3 max-w-7xl md:py-6 md:gap-4">
                     {{-- Card Report --}}
-                    @for ($i = 1; $i <= 3; $i++)
-                        <x-partials.frontend.card-report />
-                    @endfor
+                    @forelse ($reports as $report)
+                        <x-partials.frontend.card-report :$report />
+                    @empty
+                        <div class="flex flex-col justify-center capitalize">
+                            <p class="text-lg font-bold">belum ada laporan yang dibuat!</p>
+                            <p class="mt-3 text-base font-medium text-gray-500">anda dapat membuat laporan <a
+                                    class="underline cursor-pointer text-deep-koamaru-600"
+                                    href="{{ route('reporter.reports.create') }}">disini</a>
+                            </p>
+                        </div>
+                    @endforelse
                 </section>
-                <section class="flex justify-center items-center">
+                <section class="flex items-center justify-center">
                     <a href="{{ route('public-report') }}" aria-label="Menuju halaman lihat aduan publik"
                         class="items-center justify-center px-4 gap-3 select-none bg-transparent py-3 text-center align-middle text-sm font-bold text-black hover:bg-black hover:text-white transition-all duration-500 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-[1.5px] border-black rounded-lg">
                         Lihat Selengkapnya

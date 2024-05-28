@@ -19,7 +19,7 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {
-        $reports = Report::select('reports.title', 'reports.description', 'reports.created_at', 'reports.status', 'users.name', 'categories.name')
+        $reports = Report::select('reports.title', 'reports.description', 'reports.slug', 'reports.created_at', 'reports.status', 'users.name as user_name', 'categories.name as category_name')
             ->join('users', 'reports.user_id', '=', 'users.id')
             ->join('categories', 'reports.category_id', '=', 'categories.id')->where('user_id', auth()->user()->id)
             ->latest();

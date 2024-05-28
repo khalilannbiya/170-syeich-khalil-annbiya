@@ -7,13 +7,13 @@
                 {{ $report->title }}
             </h1>
             <p class="mb-2 text-sm antialiased font-semibold tracking-normal text-gray-600 capitalize">
-                {{ $report->name }}
+                {{ $report->user_name }}
             </p>
             <p class="mb-2 text-sm antialiased font-semibold tracking-normal text-gray-400">
                 {{ $report->created_at->format('H:i, d-m-Y') }}
             </p>
             <p class="mb-2 text-sm antialiased font-semibold tracking-normal text-gray-400 capitalize">
-                {{ $report->name }}
+                {{ $report->category_name }}
             </p>
             <p id="report-description"
                 class="block text-base antialiased font-normal leading-relaxed text-primary text-inherit">
