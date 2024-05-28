@@ -38,6 +38,8 @@ Route::middleware([
             'create',
             'store'
         );
+        Route::get('reports/{slug}', [ReportController::class, 'show'])->name('reports.show');
+        Route::get('reports/{reportId}/witness/{witnessId}', [ReportController::class, 'showWitnessDetail'])->name('reports.show-witnees-detail');
     });
 
     // Departement

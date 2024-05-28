@@ -9,6 +9,7 @@ use App\Models\Evidence;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ReportPostRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -19,7 +20,7 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {
-        $reports = Report::select('reports.title', 'reports.description', 'reports.slug', 'reports.created_at', 'reports.status', 'users.name as user_name', 'categories.name as category_name')
+        $reports = Report::select('reports.title', 'reports.description', 'reports.created_at', 'reports.status', 'reports.slug', 'users.name as user_name', 'categories.name as category_name')
             ->join('users', 'reports.user_id', '=', 'users.id')
             ->join('categories', 'reports.category_id', '=', 'categories.id')->where('user_id', auth()->user()->id)
             ->latest();
@@ -133,9 +134,11 @@ class ReportController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $slug)
     {
-        //
+        $report = Report::with(['user', 'category', 'reportDivisions', 'evidences', 'witnesses'])->where('user_id', auth()->user()->id)->where('slug', $slug)->firstOrFail();
+
+        return view('components.pages.frontend.detail', compact('report'));
     }
 
     /**
@@ -160,5 +163,13 @@ class ReportController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function showWitnessDetail(string $reportId, string $witnessId)
+    {
+        $report = Report::with('witnesses')->where('id', $reportId)->where('user_id', Auth::user()->id)->firstOrFail();
+        $witness = $report->witnesses->where('id', $witnessId)->firstOrFail();
+
+        return view('components.pages.frontend.witness-detail', compact('witness'));
     }
 }
