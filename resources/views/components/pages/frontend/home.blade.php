@@ -107,7 +107,7 @@
                     dapat memantau perkembangan penanganan laporan secara transparan dan akurat
                 </p>
             </section>
-            <form action="{{ route('show-public-report-detail') }}" method="GET" class="flex w-full gap-2 md:gap-3">
+            <form action="{{ route('get-public-report-detail') }}" method="GET" class="flex w-full gap-2 md:gap-3">
                 <input type="text" name="keyword" id="default-search"
                     class="w-full p-3 text-sm text-black bg-transparent border border-black rounded-lg placeholder:text-black focus:ring-black focus:border-black"
                     placeholder="Masukan kode unik..." required />
@@ -168,7 +168,13 @@
                 <section class="flex flex-wrap items-center justify-center w-full gap-3 max-w-7xl md:py-6 md:gap-4">
                     {{-- Card Report --}}
                     @forelse ($reports as $report)
-                        <x-partials.frontend.card-report :$report />
+                        <x-partials.frontend.card-report :$report>
+                            <a href="{{ route('show-public-report-detail', $report->slug) }}"
+                                aria-label="Lihat Detail Laporan"
+                                class="flex items-center justify-between px-4 gap-3 select-none rounded-md bg-black py-3 text-center align-middle text-sm font-bold text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                                Detail
+                            </a>
+                        </x-partials.frontend.card-report>
                     @empty
                         <div class="flex flex-col justify-center capitalize">
                             <p class="text-lg font-bold">belum ada laporan yang dibuat!</p>
