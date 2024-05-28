@@ -17,9 +17,21 @@ class ReportController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $reports = Report::select('reports.title', 'reports.description', 'reports.created_at', 'reports.status', 'users.name', 'categories.name')
+            ->join('users', 'reports.user_id', '=', 'users.id')
+            ->join('categories', 'reports.category_id', '=', 'categories.id')->where('user_id', auth()->user()->id)
+            ->latest();
+
+
+        if ($request->has('keyword')) {
+            $reports = $reports->where('title', 'like', '%' . $request->keyword . '%')
+                ->orWhere('unic_code', $request->keyword);
+        }
+
+        $reports = $reports->paginate(6);
+        return view('components.pages.frontend.history', compact('reports'));
     }
 
     /**
@@ -47,7 +59,7 @@ class ReportController extends Controller
             DB::commit();
 
             Alert::toast('Sukses membuat laporan!', 'success');
-            return redirect()->back();
+            return redirect()->route('reporter.reports.index');
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->withErrors(['error' => 'Gagal membuat laporan: ' . $e->getMessage()]);

@@ -6,14 +6,14 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class CardReport extends Component
+class Pagination extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct(
-        public $report,
-    ) {
+    public function __construct()
+    {
+        //
     }
 
     /**
@@ -21,6 +21,6 @@ class CardReport extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.partials.frontend.card-report');
+        return view('components.partials.frontend.pagination');
     }
 }

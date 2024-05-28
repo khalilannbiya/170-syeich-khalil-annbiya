@@ -32,6 +32,7 @@ Route::middleware([
         'role:Reporter'
     ])->name('reporter.')->group(function () {
         Route::resource('reports', ReportController::class)->only(
+            'index',
             'create',
             'store'
         );

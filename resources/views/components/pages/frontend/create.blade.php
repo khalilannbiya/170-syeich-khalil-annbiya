@@ -107,9 +107,9 @@
                     <x-partials.frontend.input-error :messages="$errors->get('is_anonymous')" />
                 </div>
 
-                <div class="mt-10 mb-2 accordion-item">
+                <div class="mt-10 accordion-item">
                     <button type="button"
-                        class="flex items-center justify-between w-full px-2 py-2 mb-4 text-lg font-semibold text-left text-black bg-gray-300 rounded accordion-header">
+                        class="flex items-center justify-between w-full px-2 py-2 text-lg font-semibold text-left text-black bg-gray-200 rounded accordion-header">
                         Bukti-bukti
                         <svg class="transition-all duration-500 chevron" xmlns="http://www.w3.org/2000/svg"
                             width="36" height="36" viewBox="0 0 24 24"
@@ -117,7 +117,7 @@
                             <path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path>
                         </svg>
                     </button>
-                    <div class="hidden accordion-content">
+                    <div class="hidden mt-4 accordion-content">
                         {{-- Bukti-bukti / Evidences --}}
                         <section>
                             <p class="text-xs font-semibold text-red-500">* Jika tidak ada bukti, boleh dihiraukan</p>
@@ -197,15 +197,15 @@
                     </div>
                 </div>
 
-                <div class="accordion-item">
+                <div class="mt-5 accordion-item">
                     <button type="button"
-                        class="flex items-center justify-between w-full px-2 py-2 mb-4 text-lg font-semibold text-left text-black bg-gray-300 rounded accordion-header">Saksi-saksi
+                        class="flex items-center justify-between w-full px-2 py-2 text-lg font-semibold text-left text-black bg-gray-200 rounded accordion-header">Saksi-saksi
                         <svg class="transition-all duration-500 chevron" xmlns="http://www.w3.org/2000/svg"
                             width="36" height="36" viewBox="0 0 24 24"
                             style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
                             <path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path>
                         </svg></button>
-                    <div class="hidden accordion-content">
+                    <div class="hidden mt-4 accordion-content">
                         {{-- Saksi-saksi / Witnesses --}}
                         <section>
                             <p class="text-xs font-semibold text-red-500">* Jika tidak ada saksi, boleh dihiraukan</p>

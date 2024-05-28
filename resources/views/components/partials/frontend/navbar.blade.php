@@ -23,6 +23,12 @@
                             Aduan</a>
                     </li>
 
+                    <li>
+                        <a href="{{ route('reporter.reports.index') }}"
+                            class="transition-all duration-500 md:text-lg lg:text-sm {{ Route::current()->getName() == 'reporter.reports.index' ? 'text-deep-koamaru-900 lg:text-deep-koamaru-900' : 'text-black hover:text-deep-koamaru-900 lg:text-black lg:hover:text-deep-koamaru-900' }}">Riwayat
+                            Laporan</a>
+                    </li>
+
                     {{-- Navlink mobile version --}}
                     <li class="block lg:hidden">
                         <a href="{{ route('profile.edit') }}"
