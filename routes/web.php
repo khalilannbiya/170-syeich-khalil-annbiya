@@ -8,7 +8,7 @@ use App\Http\Controllers\FrontendController;
 Route::get('/', [FrontendController::class, 'index'])->name('index');
 Route::get('/reports/public/detail', [FrontendController::class, 'showPublicReportDetail'])->name('show-public-report-detail');
 Route::view('/about-us', 'components.pages.frontend.about-us')->name('about-us');
-Route::view('/public-report', 'components.pages.frontend.public-reports')->name('public-report');
+Route::view('/reports/public', 'components.pages.frontend.public-reports')->name('public-report');
 Route::view('/detail', 'components.pages.frontend.detail')->name('detail');
 Route::view('/history', 'components.pages.frontend.history')->name('history');
 

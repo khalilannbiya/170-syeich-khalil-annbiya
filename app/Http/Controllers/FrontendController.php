@@ -13,13 +13,7 @@ class FrontendController extends Controller
         $reports = Report::select('reports.title', 'reports.description', 'reports.slug', 'reports.created_at', 'reports.status', 'users.name as user_name', 'categories.name as category_name')
             ->join('users', 'reports.user_id', '=', 'users.id')
             ->join('categories', 'reports.category_id', '=', 'categories.id')
-            ->latest()->take(3);
-
-        if ($request->has('keyword')) {
-            $reports = $reports->where('unic_code', $request->keyword);
-        }
-
-        $reports = $reports->get();
+            ->latest()->take(3)->get();
 
         return view('components.pages.frontend.home', compact('reports'));
     }
@@ -38,20 +32,14 @@ class FrontendController extends Controller
         // seluruh evidence, kalau tidakk ada maka tampilkan pesan
         // lokasi @@
         if ($request->has('keyword')) {
-            $reports = Report::with(['user', 'category', 'evidences', 'reportDivisions'])->where('unic_code', $request->keyword)->first();
+            $report = Report::with(['user', 'category', 'evidences', 'reportDivisions'])->where('unic_code', $request->keyword)->first();
         }
 
-        if ($reports) {
-            return view('components.pages.frontend.detail');
+        if ($report) {
+            return view('components.pages.frontend.detail', compact('report'));
         }
 
         Alert::toast('Tidak ada laporan yang sesuai!', 'error');
         return redirect()->route('index');
-
-        // cari kode unik
-        // jika ada report yang mempunyai kode unik yang dimasukan
-        // redirect ke detail publik
-        // kalau tidak ada maka
-        // munculkan pesan di index
     }
 }
