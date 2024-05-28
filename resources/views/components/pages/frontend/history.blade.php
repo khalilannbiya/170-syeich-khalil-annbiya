@@ -42,7 +42,12 @@
         <section class="flex flex-wrap items-center justify-center w-full gap-3 my-10 max-w-7xl md:py-6 md:gap-4">
 
             @forelse ($reports as $report)
-                <x-partials.frontend.card-report :report="$report" />
+                <x-partials.frontend.card-report :report="$report">
+                    <a href="{{ route('reporter.reports.show', $report->slug) }}" aria-label="Lihat Detail Laporan"
+                        class="flex items-center justify-between px-4 gap-3 select-none rounded-md bg-black py-3 text-center align-middle text-sm font-bold text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                        Detail
+                    </a>
+                </x-partials.frontend.card-report>
             @empty
                 <div class="flex flex-col justify-center capitalize">
                     <p class="text-lg font-bold">belum ada laporan yang dibuat!</p>

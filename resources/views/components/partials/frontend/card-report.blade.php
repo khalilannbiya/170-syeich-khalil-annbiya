@@ -23,10 +23,7 @@
         <div class="flex items-center justify-between p-6 pt-0">
             <p class="text-sm font-semibold capitalize">{{ $report->status }}
             </p>
-            <a href="{{ route('reporter.reports.show', $report->slug) }}" aria-label="Lihat Detail Laporan"
-                class="flex items-center justify-between px-4 gap-3 select-none rounded-md bg-black py-3 text-center align-middle text-sm font-bold text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-                Detail
-            </a>
+            {{ $slot }}
         </div>
     </div>
 </article>

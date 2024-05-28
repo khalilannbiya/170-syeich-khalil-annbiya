@@ -1,13 +1,13 @@
 <section class="">
-    <div class="border-t border-b border-gray-200 py-12 mt-16 px-4">
-        <div class="flex justify-start md:justify-center mb-8">
+    <div class="px-4 py-12 mt-16 border-t border-b border-gray-200">
+        <div class="flex justify-start mb-8 md:justify-center">
             <img class="max-w-[125px] max-h-[35px] sm:max-w-[130px] sm:max-h-[40px] md:max-w-[150px] md:max-h-[46px] lg:max-w-[145px] lg:max-h-[50px] object-contain"
                 src="{{ asset('assets/images/logo.webp') }}" alt="Logo Laporpak —  Melawan Kejahatan Bersama" />
         </div>
         <aside class="container mx-auto">
-            <div class="flex flex-wrap -mx-4 justify-around">
-                <div class="px-4 w-full md:w-3/12 mb-4 md:mb-0">
-                    <h5 class="text-lg text-black font-semibold mb-2 relative">
+            <div class="flex flex-wrap justify-around -mx-4">
+                <div class="w-full px-4 mb-4 md:w-3/12 md:mb-0">
+                    <h5 class="relative mb-2 text-lg font-semibold text-black">
                         Lokasi
                     </h5>
                     <a href="https://maps.app.goo.gl/cHoUQcbfsTSsDWAm7" target="_blank" class="hover:underline">
@@ -16,8 +16,8 @@
                         </address>
                     </a>
                 </div>
-                <div class="px-4 w-full md:w-4/12 lg:w-3/12 mb-4 md:mb-0 accordion">
-                    <h5 class="text-lg text-black font-semibold mb-2 relative">Hubungi Kami</h5>
+                <div class="w-full px-4 mb-4 md:w-4/12 lg:w-3/12 md:mb-0 accordion">
+                    <h5 class="relative mb-2 text-lg font-semibold text-black">Hubungi Kami</h5>
                     <ul class="h-0 md:h-auto">
                         <li>
                             <a href="https://api.whatsapp.com/send?phone=6285176989710&text=Halo,%20Saya%20ingin..."
@@ -50,19 +50,21 @@
                         </li>
                     </ul>
                 </div>
-                <div class="px-4 w-full md:w-2/12 my-14 md:my-0 accordion">
-                    <h5 class="text-lg text-black font-semibold mb-2 relative">Telusuri</h5>
+                <div class="w-full px-4 md:w-2/12 my-14 md:my-0 accordion">
+                    <h5 class="relative mb-2 text-lg font-semibold text-black">Telusuri</h5>
                     <ul class="h-0 md:h-auto">
                         <li>
                             <a href="{{ route('index') }}"
                                 class="hover:underline py-1 block text-[13px] text-black">Beranda</a>
                         </li>
                         <li>
-                            <a href="" class="hover:underline py-1 block text-[13px] text-black">Tentang
+                            <a href="{{ route('about-us') }}"
+                                class="hover:underline py-1 block text-[13px] text-black">Tentang
                                 Kami</a>
                         </li>
                         <li>
-                            <a href="" class="hover:underline py-1 block text-[13px] text-black">Laporan
+                            <a href="{{ route('public-report') }}"
+                                class="hover:underline py-1 block text-[13px] text-black">Laporan
                                 Publik</a>
                         </li>
                     </ul>
@@ -73,7 +75,7 @@
 </section>
 
 <!-- START: FOOTER -->
-<footer class="flex text-center px-4 py-8 justify-center">
+<footer class="flex justify-center px-4 py-8 text-center">
     <p class="text-sm text-black">
         Copyright {{ date('Y') }} • All Rights Reserved Kepolisian Resor Kabupaten Karawang
     </p>
