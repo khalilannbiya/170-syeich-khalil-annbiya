@@ -32,17 +32,20 @@
                     {{-- Navlink mobile version --}}
                     <li class="block lg:hidden">
                         <a href="{{ route('profile.edit') }}"
-                            class="px-6 py-3 bg-transparent hover:text-white hover:bg-slate-700 border border-black focus:ring-4 focus:outline-none focus:ring-black transition-all duration-500 ease-in-out font-medium text-sm rounded">
+                            class="px-6 py-3 text-sm font-medium transition-all duration-500 ease-in-out bg-transparent border border-black rounded hover:text-white hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-black">
                             Profile
                         </a>
                     </li>
 
                     {{-- Navlink mobile version --}}
                     <li class="block lg:hidden">
-                        <a href="{{ route('logout') }}"
-                            class="text-white px-8 py-3 bg-black hover:bg-slate-700 border border-black focus:ring-4 focus:outline-none focus:ring-black transition-all duration-500 ease-in-out font-medium text-sm rounded">
-                            Logout
-                        </a>
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button type="submit"
+                                class="px-8 py-3 text-sm font-medium text-white transition-all duration-500 ease-in-out bg-black border border-black rounded hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-black">
+                                Logout
+                            </button>
+                        </form>
                     </li>
                 @endif
 
@@ -63,7 +66,7 @@
                     {{-- Navlink mobile version --}}
                     <li class="block lg:hidden">
                         <a href="{{ route('register') }}"
-                            class="px-6 py-3 bg-transparent hover:text-white hover:bg-slate-700 border border-black focus:ring-4 focus:outline-none focus:ring-black transition-all duration-500 ease-in-out font-medium text-sm rounded">
+                            class="px-6 py-3 text-sm font-medium transition-all duration-500 ease-in-out bg-transparent border border-black rounded hover:text-white hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-black">
                             Daftar
                         </a>
                     </li>
@@ -71,7 +74,7 @@
                     {{-- Navlink mobile version --}}
                     <li class="block lg:hidden">
                         <a href="{{ route('login') }}"
-                            class="text-white px-8 py-3 bg-black hover:bg-slate-700 border border-black focus:ring-4 focus:outline-none focus:ring-black transition-all duration-500 ease-in-out font-medium text-sm rounded">
+                            class="px-8 py-3 text-sm font-medium text-white transition-all duration-500 ease-in-out bg-black border border-black rounded hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-black">
                             Masuk
                         </a>
                     </li>
@@ -84,28 +87,24 @@
                 {{-- if user is reporter --}}
                 @if (auth()->check() && auth()->user()->role->name == 'Reporter')
                     <a href="{{ route('profile.edit') }}"
-                        class="px-6 py-3 bg-transparent hover:text-white hover:bg-slate-700 border border-black
-                    focus:ring-4 focus:outline-none focus:ring-black transition-all duration-500 ease-in-out font-medium
-                    text-sm rounded">
+                        class="px-6 py-3 text-sm font-medium transition-all duration-500 ease-in-out bg-transparent border border-black rounded hover:text-white hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-black">
                         Profile
                     </a>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         <button type="submit"
-                            class="text-white px-8 py-3 bg-black hover:bg-slate-700 border border-black focus:ring-4 focus:outline-none focus:ring-black transition-all duration-500 ease-in-out font-medium text-sm rounded">Logout</button>
+                            class="px-8 py-3 text-sm font-medium text-white transition-all duration-500 ease-in-out bg-black border border-black rounded hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-black">Logout</button>
                     </form>
                 @endif
 
                 {{-- if user is not logged in --}}
                 @guest
                     <a href="{{ route('register') }}"
-                        class="px-6 py-3 bg-transparent hover:text-white hover:bg-slate-700 border border-black
-                focus:ring-4 focus:outline-none focus:ring-black transition-all duration-500 ease-in-out font-medium
-                text-sm rounded">
+                        class="px-6 py-3 text-sm font-medium transition-all duration-500 ease-in-out bg-transparent border border-black rounded hover:text-white hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-black">
                         Daftar
                     </a>
                     <a href="{{ route('login') }}"
-                        class="text-white px-8 py-3 bg-black hover:bg-slate-700 border border-black focus:ring-4 focus:outline-none focus:ring-black transition-all duration-500 ease-in-out font-medium text-sm rounded">
+                        class="px-8 py-3 text-sm font-medium text-white transition-all duration-500 ease-in-out bg-black border border-black rounded hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-black">
                         Masuk
                     </a>
                 @endguest

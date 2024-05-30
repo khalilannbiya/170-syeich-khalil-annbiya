@@ -4,20 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', [FrontendController::class, 'index'])->name('index');
 Route::get('/reports/public/detail', [FrontendController::class, 'getPublicReportDetail'])->name('get-public-report-detail');
 Route::get('/reports/{slug}/public', [FrontendController::class, 'showPublicReportDetail'])->name('show-public-report-detail');
 Route::view('/about-us', 'components.pages.frontend.about-us')->name('about-us');
 Route::get('/reports/public', [FrontendController::class, 'publicReport'])->name('public-report');
-Route::view('/detail', 'components.pages.frontend.detail')->name('detail');
-Route::view('/history', 'components.pages.frontend.history')->name('history');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -47,11 +40,13 @@ Route::middleware([
     Route::middleware([
         'role:Departement'
     ])->name('departement.')->prefix('departement')->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     });
 
     Route::middleware([
         'role:Adminisrator'
     ])->name('adminisrator.')->prefix('adminisrator')->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     });
 });
 
