@@ -52,6 +52,9 @@ Route::middleware([
         Route::get('/reports/{slug}', [ReportController::class, 'getDetailedReport'])->name('reports.getDetailedReport');
         Route::get('reports/{reportId}/evidence/{evidenceId}', [ReportController::class, 'getDetailedEvidence'])->name('reports.getDetailedEvidence');
         Route::get('reports/{reportId}/witness/{witnessId}', [ReportController::class, 'getDetailedWitness'])->name('reports.getDetailedWitness');
+        Route::resource('reports', ReportController::class)->only(
+            'destroy'
+        );
     });
 });
 
