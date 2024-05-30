@@ -2,6 +2,16 @@
     <x-slot:title>Data Laporan | </x-slot:title>
 
     <section>
+        {{-- Breadcrumb --}}
+        <nav class="mb-5">
+            <ol class="flex items-center gap-2">
+                <li>
+                    <a class="font-medium" href="{{ route('adminisrator.dashboard') }}">Dashboard /</a>
+                </li>
+                <li class="font-medium text-primary">Data Laporan</li>
+            </ol>
+        </nav>
+
         <table id="crudTable">
             <thead>
                 <tr>
@@ -20,15 +30,17 @@
     @push('script')
         <script type="text/javascript">
             $(document).ready(function() {
+                let counter = 1;
                 $('#crudTable').DataTable({
                     serverSide: true,
                     ajax: {
                         url: '{!! url()->current() !!}'
                     },
                     columns: [{
-                            data: 'id',
-                            name: 'id',
-                            width: '5%'
+                            "render": function(data, type, row) {
+                                return counter++; // Increment counter and return the value
+                            },
+                            "width": "5%"
                         },
                         {
                             data: 'title',

@@ -177,12 +177,12 @@ class ReportController extends Controller
     public function getAdminReportsList()
     {
         if (request()->ajax()) {
-            $reports = Report::with('category')->get();
+            $reports = Report::with('category')->latest();
             return DataTables::of($reports)
                 ->addColumn('action', function ($item) {
                     return '
                     <div class="wrapper-action">
-                        <a href="#">
+                        <a href="' . route('adminisrator.reports.getDetailedReport', $item->slug) . '">
                             Detail
                         </a>
                         <a href="#">
@@ -204,5 +204,23 @@ class ReportController extends Controller
         }
 
         return view('components.pages.dashboard.reports.index');
+    }
+
+    public function getDetailedReport(string $slug)
+    {
+        $report = Report::with(['user', 'category', 'reportDivisions', 'evidences', 'witnesses'])->where('slug', $slug)->firstOrFail();
+        return view('components.pages.dashboard.reports.show', compact('report'));
+    }
+
+    public function getDetailedEvidence($reportId, $evidenceId)
+    {
+        $evidence = Evidence::with('report')->where('id', $evidenceId)->where('report_id', $reportId)->firstOrFail();
+        return view('components.pages.dashboard.reports.detail-evidence', compact('evidence'));
+    }
+
+    public function getDetailedWitness($reportId, $witnessId)
+    {
+        $witness = Witness::with('report')->where('id', $witnessId)->where('report_id', $reportId)->firstOrFail();
+        return view('components.pages.dashboard.reports.detail-witness', compact('witness'));
     }
 }
