@@ -19,3 +19,9 @@
     background: linear-gradient(90deg, rgba(98, 207, 244, 1) 0%, rgba(44, 103, 242, 1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#62cff4",endColorstr="#2c67f2",GradientType=1);
 }
+
+@layer base {
+    .body {
+      @apply relative text-base font-normal z-1 bg-whiten font-montserrat text-body;
+    }
+  }

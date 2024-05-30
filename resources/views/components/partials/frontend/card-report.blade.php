@@ -16,7 +16,7 @@
                 {{ $report->category_name }}
             </p>
             <p id="report-description"
-                class="block text-base antialiased font-normal leading-relaxed text-primary text-inherit">
+                class="block text-base antialiased font-normal leading-relaxed text-gray-500 text-inherit">
                 {{ $report->description }}
             </p>
         </div>

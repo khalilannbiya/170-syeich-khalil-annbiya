@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
         $user->role_id = 2;
         $user->division_id = 3;
         $user->name = 'Khalil Annbiya';
-        $user->email = 'khalilannbiya@gmailcom';
+        $user->email = 'khalilannbiya@gmail.com';
         $user->password = Hash::make('Rahasia123#');
         $user->phone = '+6281234567890';
         $user->address = 'Jl. Jalan Jalan No. 234';
