@@ -49,6 +49,9 @@ Route::middleware([
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::get('/reports', [ReportController::class, 'getAdminReportsList'])->name('reports.getAdminReportsList');
+        Route::get('/reports/{slug}', [ReportController::class, 'getDetailedReport'])->name('reports.getDetailedReport');
+        Route::get('reports/{reportId}/evidence/{evidenceId}', [ReportController::class, 'getDetailedEvidence'])->name('reports.getDetailedEvidence');
+        Route::get('reports/{reportId}/witness/{witnessId}', [ReportController::class, 'getDetailedWitness'])->name('reports.getDetailedWitness');
     });
 });
 
