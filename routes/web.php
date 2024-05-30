@@ -47,6 +47,8 @@ Route::middleware([
         'role:Adminisrator'
     ])->name('adminisrator.')->prefix('adminisrator')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::get('/reports', [ReportController::class, 'getAdminReportsList'])->name('reports.getAdminReportsList');
     });
 });
 

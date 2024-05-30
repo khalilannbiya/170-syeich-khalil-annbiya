@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ReportPostRequest;
 use RealRashid\SweetAlert\Facades\Alert;
+use Yajra\DataTables\Facades\DataTables;
 
 class ReportController extends Controller
 {
@@ -171,5 +172,37 @@ class ReportController extends Controller
         $witness = $report->witnesses->where('id', $witnessId)->firstOrFail();
 
         return view('components.pages.frontend.witness-detail', compact('witness'));
+    }
+
+    public function getAdminReportsList()
+    {
+        if (request()->ajax()) {
+            $reports = Report::with('category')->get();
+            return DataTables::of($reports)
+                ->addColumn('action', function ($item) {
+                    return '
+                    <div class="wrapper-action">
+                        <a href="#">
+                            Detail
+                        </a>
+                        <a href="#">
+                            Edit
+                        </a>
+                        <div>
+                            <form action="#" method="post">
+                            ' . method_field('delete') . csrf_field() . '
+                            <button type="submit">Hapus</button>
+                            </form>
+                        </div>
+                    </div>
+                ';
+                })
+                ->editColumn('created_at', function ($item) {
+                    return $item->created_at->format('H:i, d-m-Y');
+                })
+                ->make();
+        }
+
+        return view('components.pages.dashboard.reports.index');
     }
 }
