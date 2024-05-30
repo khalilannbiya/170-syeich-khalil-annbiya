@@ -161,9 +161,12 @@ class ReportController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Report $report)
     {
-        //
+        $report->delete();
+
+        Alert::toast('Berhasil menghapus data laporan', 'success');
+        return redirect()->route('adminisrator.reports.getAdminReportsList');
     }
 
     public function showWitnessDetail(string $reportId, string $witnessId)
@@ -189,7 +192,7 @@ class ReportController extends Controller
                             Edit
                         </a>
                         <div>
-                            <form action="#" method="post">
+                            <form action="' . route('adminisrator.reports.destroy', $item->id) . '" method="post">
                             ' . method_field('delete') . csrf_field() . '
                             <button type="submit">Hapus</button>
                             </form>
