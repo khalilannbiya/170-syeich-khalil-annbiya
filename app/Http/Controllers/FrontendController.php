@@ -46,7 +46,7 @@ class FrontendController extends Controller
 
     public function showPublicReportDetail(string $slug)
     {
-        $report = Report::with(['user', 'category', 'evidences', 'reportDivisions'])->where('slug', $slug)->firstOrFail();
+        $report = Report::with(['user', 'category', 'evidences', 'division'])->where('slug', $slug)->firstOrFail();
 
         return view('components.pages.frontend.detail-public', compact('report'));
     }

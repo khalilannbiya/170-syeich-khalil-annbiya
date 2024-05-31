@@ -1,5 +1,5 @@
 <x-layouts.dashboard>
-    <x-slot:title>Edit | </x-slot:title>
+    <x-slot:title>Tambah | </x-slot:title>
 
     <div>
         {{-- Alert --}}
@@ -55,7 +55,7 @@
                     @csrf
                     <div class="mb-4.5">
                         <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent dark:bg-form-input">
-                            <select name="disposition[]"
+                            <select name="disposition"
                                 class="relative mb-3 z-20 w-full appearance-none capitalize rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                                 :class="isOptionSelected && 'text-black dark:text-white'"
                                 @change="isOptionSelected = true">

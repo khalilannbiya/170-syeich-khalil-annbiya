@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ReportPostRequest;
-use App\Models\ReportDivision;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -139,7 +138,7 @@ class ReportController extends Controller
      */
     public function show(string $slug)
     {
-        $report = Report::with(['user', 'category', 'reportDivisions', 'evidences', 'witnesses'])->where('user_id', auth()->user()->id)->where('slug', $slug)->firstOrFail();
+        $report = Report::with(['user', 'category', 'division', 'evidences', 'witnesses'])->where('user_id', auth()->user()->id)->where('slug', $slug)->firstOrFail();
 
         return view('components.pages.frontend.detail', compact('report'));
     }
@@ -155,7 +154,7 @@ class ReportController extends Controller
 
         $divisions = Division::all();
 
-        $report = Report::with('reportDivisions')->where('slug', $slug)->firstOrFail();
+        $report = Report::with('division')->where('slug', $slug)->firstOrFail();
         return view('components.pages.dashboard.reports.edit', compact('statuses', 'report', 'divisions'));
     }
 
@@ -227,7 +226,7 @@ class ReportController extends Controller
 
     public function getDetailedReport(string $slug)
     {
-        $report = Report::with(['user', 'category', 'reportDivisions', 'evidences', 'witnesses'])->where('slug', $slug)->firstOrFail();
+        $report = Report::with(['user', 'category', 'division', 'evidences', 'witnesses'])->where('slug', $slug)->firstOrFail();
         return view('components.pages.dashboard.reports.show', compact('report'));
     }
 
@@ -255,25 +254,15 @@ class ReportController extends Controller
     {
         // Validasi request
         $request->validate([
-            'disposition' => 'required|array',
-            'disposition.*' => 'distinct' // Validasi bahwa setiap item dalam array harus unik
-        ], [
-            'disposition.*.distinct' => 'Tidak boleh disposisi yang sama.'
+            'disposition' => 'required',
         ]);
 
         try {
 
             DB::beginTransaction();
 
-            $report = Report::with('reportDivisions')->find($reportId);
-            foreach ($request->disposition as $key => $item) {
-                $report->reportDivisions()->create(
-                    [
-                        'division_id' => (int)$item
-                    ]
-                );
-            }
-
+            $report = Report::with('division')->find($reportId);
+            $report->division_id = $request->disposition;
             $report->status = "sedang diproses";
             $report->save();
 
@@ -290,27 +279,15 @@ class ReportController extends Controller
     {
         // Validasi request
         $request->validate([
-            'reportDivisionId' => 'required|array',
-            'disposition' => 'required|array',
-            'disposition.*' => 'distinct' // Validasi bahwa setiap item dalam array harus unik
-        ], [
-            'disposition.*.distinct' => 'Tidak boleh disposisi yang sama.'
+            'disposition' => 'required',
         ]);
 
         try {
 
             DB::beginTransaction();
 
-            $report = Report::with('reportDivisions')->find($reportId);
-            foreach ($request->reportDivisionId as $key => $divisionId) {
-                $division = $report->reportDivisions->where('id', $divisionId)->first();
-
-                if ($division) {
-                    if (isset($request->disposition[$key])) {
-                        $division->update(['division_id' => (int)$request->disposition[$key]]);
-                    }
-                }
-            }
+            $report = Report::with('division')->find($reportId);
+            $report->division_id = $request->disposition;
 
             $report->status = "sedang diproses";
             $report->update();

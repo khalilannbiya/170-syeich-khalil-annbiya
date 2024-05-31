@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
-use App\Models\ReportDivision;
+use App\Models\Report;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,8 +22,8 @@ class Division extends Model
         return $this->hasMany(User::class);
     }
 
-    public function reportDivisions(): HasMany
+    public function reports(): HasMany
     {
-        return $this->hasMany(ReportDivision::class);
+        return $this->hasMany(Report::class);
     }
 }

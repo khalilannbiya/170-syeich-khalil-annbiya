@@ -3,7 +3,7 @@
 
     <div>
         {{-- Alert --}}
-        @if (!$report->reportDivisions()->exists())
+        @if (!$report->division()->exists())
             <div
                 class="flex w-full border-l-6 border-warning bg-warning bg-opacity-[15%] px-7 py-8 mb-10 shadow-md dark:bg-[#1B1B24] dark:bg-opacity-30 md:p-9">
                 <div class="mr-5 flex h-9 w-9 items-center justify-center rounded-lg bg-warning bg-opacity-30">
@@ -112,9 +112,8 @@
                         Didisposisikan
                     </label>
                     <input type="text" disabled readonly
-                        value="@if ($report->reportDivisions()->exists()) {{ $report->reportDivisions->pluck('division.name')->implode(', ') }}
-              @else
-                 Belum didisposisikan @endif"
+                        value="@if ($report->division()->exists()) {{ $report->division->name }}
+              @else Belum didisposisikan @endif"
                         class="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black-dashboard outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white-dahsboard dark:focus:border-primary" />
                 </div>
 
