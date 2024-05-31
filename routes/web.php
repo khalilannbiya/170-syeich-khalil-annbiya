@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FrontendController;
@@ -60,6 +61,12 @@ Route::middleware([
             'destroy',
             'update'
         );
+
+        Route::get('users/officer', [UserController::class, 'getDataOfficer'])->name('users.officer.getDataOfficer');
+        Route::get('users/{id}/officer', [UserController::class, 'showOfficer'])->name('users.officer.showOfficer');
+        Route::get('users/{user}/officer/edit', [UserController::class, 'editOfficer'])->name('users.officer.editOfficer');
+        Route::put('users/{id}/officer', [UserController::class, 'updateOfficer'])->name('users.officer.updateOfficer');
+        Route::resource('users', UserController::class);
     });
 });
 
