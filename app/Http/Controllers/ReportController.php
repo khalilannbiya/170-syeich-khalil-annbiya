@@ -7,6 +7,7 @@ use App\Models\Witness;
 use App\Models\Category;
 use App\Models\Division;
 use App\Models\Evidence;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -167,7 +168,11 @@ class ReportController extends Controller
         $report->update();
 
         Alert::toast('Berhasil ubah status', 'success');
-        return redirect()->route('adminisrator.reports.getAdminReportsList');
+        if (Auth::user()->role_id == 1) {
+            return redirect()->route('adminisrator.reports.getAdminReportsList');
+        } else {
+            return redirect()->route('departement.reports.getDepartementReportsList');
+        }
     }
 
     /**
@@ -178,7 +183,11 @@ class ReportController extends Controller
         $report->delete();
 
         Alert::toast('Berhasil menghapus data laporan', 'success');
-        return redirect()->route('adminisrator.reports.getAdminReportsList');
+        if (Auth::user()->role_id == 1) {
+            return redirect()->route('adminisrator.reports.getAdminReportsList');
+        } else {
+            return redirect()->route('departement.reports.getDepartementReportsList');
+        }
     }
 
     public function showWitnessDetail(string $reportId, string $witnessId)
@@ -300,5 +309,38 @@ class ReportController extends Controller
             DB::rollBack();
             return back()->withErrors(['error' => 'Gagal mengubah disposisi: ' . $e->getMessage()]);
         }
+    }
+
+    public function getDepartementReportsList()
+    {
+        if (request()->ajax()) {
+            $user = User::find(Auth::user()->id);
+            $reports = Report::with('category')->where('division_id', $user->division_id)->latest();
+            return DataTables::of($reports)
+                ->addColumn('action', function ($item) {
+                    return '
+                    <div class="wrapper-action">
+                        <a href="' . route('departement.reports.getDetailedReport', $item->slug) . '">
+                            Detail
+                        </a>
+                        <a href="' . route('departement.reports.edit', $item->slug) . '">
+                            Edit
+                        </a>
+                        <div>
+                            <form action="' . route('departement.reports.destroy', $item->id) . '" method="post">
+                            ' . method_field('delete') . csrf_field() . '
+                            <button type="submit">Hapus</button>
+                            </form>
+                        </div>
+                    </div>
+                ';
+                })
+                ->editColumn('created_at', function ($item) {
+                    return $item->created_at->format('H:i, d-m-Y');
+                })
+                ->make();
+        }
+
+        return view('components.pages.dashboard.reports.index');
     }
 }

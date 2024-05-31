@@ -28,10 +28,20 @@
         <nav class="mb-5">
             <ol class="flex items-center gap-2">
                 <li>
-                    <a class="font-medium" href="{{ route('adminisrator.dashboard') }}">Dashboard /</a>
+                    @if (auth()->user()->role_id == 1)
+                        <a class="font-medium" href="{{ route('adminisrator.dashboard') }}">Dashboard /</a>
+                    @else
+                        <a class="font-medium" href="{{ route('departement.dashboard') }}">Dashboard /</a>
+                    @endif
                 </li>
                 <li>
-                    <a class="font-medium" href="{{ route('adminisrator.reports.getAdminReportsList') }}">Laporan /</a>
+                    @if (auth()->user()->role_id == 1)
+                        <a class="font-medium" href="{{ route('adminisrator.reports.getAdminReportsList') }}">Laporan
+                            /</a>
+                    @else
+                        <a class="font-medium"
+                            href="{{ route('departement.reports.getDepartementReportsList') }}">Laporan /</a>
+                    @endif
                 </li>
                 <li class="font-medium text-primary">Detail</li>
             </ol>
@@ -225,9 +235,15 @@
                                             class="mt-2 text-base text-gray-500 dark:text-gray-300 font-medium text-pretty">
                                             {{ $item->description }}</p>
                                     </div>
-                                    <a href="{{ route('adminisrator.reports.getDetailedEvidence', [$item->report_id, $item->id]) }}"
-                                        class="mt-4 cursor-pointer text-deep-koamaru-600">Lihat
-                                        detail...</a>
+                                    @if (auth()->user()->role_id == 1)
+                                        <a href="{{ route('adminisrator.reports.getDetailedEvidence', [$item->report_id, $item->id]) }}"
+                                            class="mt-4 cursor-pointer text-deep-koamaru-600">Lihat
+                                            detail...</a>
+                                    @else
+                                        <a href="{{ route('departement.reports.getDetailedEvidence', [$item->report_id, $item->id]) }}"
+                                            class="mt-4 cursor-pointer text-deep-koamaru-600">Lihat
+                                            detail...</a>
+                                    @endif
                                 </article>
                             @endforeach
                         @else
@@ -249,9 +265,16 @@
                                         <p id="description-witness"
                                             class="mt-2 text-base text-gray-500 dark:text-gray-300 font-medium text-pretty">
                                             {{ $item->description }}</p>
-                                        <a href="{{ route('adminisrator.reports.getDetailedWitness', [$item->report_id, $item->id]) }}"
-                                            class="mt-2 cursor-pointer text-deep-koamaru-600">Lihat
-                                            detail...</a>
+
+                                        @if (auth()->user()->role_id == 1)
+                                            <a href="{{ route('adminisrator.reports.getDetailedWitness', [$item->report_id, $item->id]) }}"
+                                                class="mt-2 cursor-pointer text-deep-koamaru-600">Lihat
+                                                detail...</a>
+                                        @else
+                                            <a href="{{ route('departement.reports.getDetailedWitness', [$item->report_id, $item->id]) }}"
+                                                class="mt-2 cursor-pointer text-deep-koamaru-600">Lihat
+                                                detail...</a>
+                                        @endif
                                     </article>
                                 @endforeach
                             @else

@@ -35,13 +35,13 @@ class AuthenticatedSessionController extends Controller
 
         // If user is admin, redirect to administrator dashboard
         if ($user->role_id == 1) {
-            return redirect()->intended(route('adminisrator.dashboard', absolute: false));
+            return redirect()->intended(route('adminisrator.dashboard'));
         } else if ($user->role_id == 2) {
             // If user is unit admin, redirect to departement dashboard
-            return redirect()->intended(route('departement.dashboard', absolute: false));
+            return redirect()->intended(route('departement.dashboard'));
         } else {
             // If user is not admin or unit admin, redirect to index
-            return redirect()->intended(route('index', absolute: false));
+            return redirect()->intended(route('index'));
         }
     }
 
