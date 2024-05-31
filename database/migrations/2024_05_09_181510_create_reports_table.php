@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id')->nullable(false);
+            $table->unsignedInteger('division_id')->nullable(true);
             $table->string('title', 50)->nullable(false);
             $table->text('description')->nullable(false);
             $table->string('location', 100)->nullable(false);
@@ -26,6 +27,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('division_id')->references('id')->on('divisions')->cascadeOnDelete();
         });
     }
 

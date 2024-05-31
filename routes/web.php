@@ -42,6 +42,16 @@ Route::middleware([
         'role:Departement'
     ])->name('departement.')->prefix('departement')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::get('/reports', [ReportController::class, 'getDepartementReportsList'])->name('reports.getDepartementReportsList');
+        Route::get('/reports/{slug}', [ReportController::class, 'getDetailedReport'])->name('reports.getDetailedReport');
+        Route::get('reports/{slug}/edit', [ReportController::class, 'edit'])->name('reports.edit');
+        Route::resource('reports', ReportController::class)->only(
+            'destroy',
+            'update'
+        );
+        Route::get('reports/{reportId}/evidence/{evidenceId}', [ReportController::class, 'getDetailedEvidence'])->name('reports.getDetailedEvidence');
+        Route::get('reports/{reportId}/witness/{witnessId}', [ReportController::class, 'getDetailedWitness'])->name('reports.getDetailedWitness');
     });
 
     Route::middleware([

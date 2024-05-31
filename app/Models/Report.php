@@ -5,8 +5,8 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Witness;
 use App\Models\Category;
+use App\Models\Division;
 use App\Models\Evidence;
-use App\Models\ReportDivision;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -19,6 +19,7 @@ class Report extends Model
 
     protected $fillable = [
         'user_id',
+        'division_id',
         'category_id',
         'title',
         'description',
@@ -36,14 +37,14 @@ class Report extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function reportDivisions(): HasMany
-    {
-        return $this->hasMany(ReportDivision::class);
-    }
-
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function division(): BelongsTo
+    {
+        return $this->belongsTo(Division::class);
     }
 
     public function evidences(): HasMany

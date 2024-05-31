@@ -52,9 +52,9 @@
             <p class="mb-1 font-medium">Status laporan: <span
                     class="font-semibold capitalize">{{ $report->status }}</span>
             </p>
-            @if ($report->reportDivisions()->exists())
+            @if ($report->division()->exists())
                 <p class="mb-1 font-medium">Didisposisikan ke <span
-                        class="font-semibold capitalize">{{ $report->reportDivisions->pluck('division.name')->implode(', ') }}</span>
+                        class="font-semibold capitalize">{{ $report->division->name }}</span>
                 </p>
             @else
                 <p class="mb-1 font-semibold">Belum didisposisikan</p>

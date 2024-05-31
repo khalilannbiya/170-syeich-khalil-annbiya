@@ -3,7 +3,7 @@
     @click.outside="sidebarToggle = false">
     <!-- SIDEBAR HEADER -->
     <div class="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-        <a href="{{ route('adminisrator.dashboard') }}">
+        <a href="{{ auth()->user()->role_id == 1 ? route('adminisrator.dashboard') : route('departement.dashboard') }}">
             <img src="{{ asset('assets/images/logo-white.png') }}" alt="Logo" />
         </a>
 
@@ -52,17 +52,33 @@
                     </li>
                     <!-- Menu Item Dashboard -->
 
-                    <li>
-                        <a class="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark-dashboard dark:hover:bg-meta-4 {{ Route::current()->getName() == 'adminisrator.reports.getAdminReportsList' ? 'bg-graydark-dashboard dark:bg-meta-4' : '' }}"
-                            href="{{ route('adminisrator.reports.getAdminReportsList') }}"> <svg
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
-                                <path
-                                    d="m20 8-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM9 19H7v-9h2v9zm4 0h-2v-6h2v6zm4 0h-2v-3h2v3zM14 9h-1V4l5 5h-4z">
-                                </path>
-                            </svg> Data Laporan
-                        </a>
-                    </li>
+
+
+                    @if (auth()->user()->role_id == 1)
+                        <li>
+                            <a class="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark-dashboard dark:hover:bg-meta-4 {{ Route::current()->getName() == 'adminisrator.reports.getAdminReportsList' ? 'bg-graydark-dashboard dark:bg-meta-4' : '' }}"
+                                href="{{ route('adminisrator.reports.getAdminReportsList') }}"> <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
+                                    <path
+                                        d="m20 8-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM9 19H7v-9h2v9zm4 0h-2v-6h2v6zm4 0h-2v-3h2v3zM14 9h-1V4l5 5h-4z">
+                                    </path>
+                                </svg> Data Laporan
+                            </a>
+                        </li>
+                    @else
+                        <li>
+                            <a class="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark-dashboard dark:hover:bg-meta-4 {{ Route::current()->getName() == 'departement.reports.getDepartementReportsList' ? 'bg-graydark-dashboard dark:bg-meta-4' : '' }}"
+                                href="{{ route('departement.reports.getDepartementReportsList') }}"> <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
+                                    <path
+                                        d="m20 8-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM9 19H7v-9h2v9zm4 0h-2v-6h2v6zm4 0h-2v-3h2v3zM14 9h-1V4l5 5h-4z">
+                                    </path>
+                                </svg> Data Laporan
+                            </a>
+                        </li>
+                    @endif
 
                     <!-- Menu Item Ui Elements -->
                     <li>

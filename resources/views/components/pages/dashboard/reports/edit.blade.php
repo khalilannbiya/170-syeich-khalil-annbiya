@@ -90,35 +90,34 @@
                 </h3>
             </div>
             <div class="p-6.5">
-                    <form action="{{ route('adminisrator.reports.disposisi.update', $report->id) }}" method="post">
-                        @csrf
-                        @method('PUT')
-                        <div class="mb-4.5">
-                            <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent dark:bg-form-input">
-                                @foreach ($report->reportDivisions as $item)
-                                    <select name="disposition[]"
-                                        class="relative mb-3 z-20 w-full appearance-none capitalize rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                                        :class="isOptionSelected && 'text-black dark:text-white'"
-                                        @change="isOptionSelected = true">
-                                        <option disabled selected class="text-body capitalize">Pilih Divisi</option>
-                                        @foreach ($divisions as $division)
-                                            <option class="text-body capitalize"
-                                                value="{{ $item->division_id == $division->id ? $division->id : $division->id }}"
-                                                {{ $item->division_id == $division->id ? 'selected' : '' }}>
-                                                {{ $item->division_id == $division->id ? $division->name : $division->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <input type="text" name="reportDivisionId[]" value="{{ $item->id }}" hidden>
-                                @endforeach
-                            </div>
+                <form action="{{ route('adminisrator.reports.disposisi.update', $report->id) }}" method="post">
+                    @csrf
+                    @method('PUT')
+                    <div class="mb-4.5">
+                        <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent dark:bg-form-input">
+                            @if ($report->division()->exists())
+                                <select name="disposition"
+                                    class="relative mb-3 z-20 w-full appearance-none capitalize rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                                    :class="isOptionSelected && 'text-black dark:text-white'"
+                                    @change="isOptionSelected = true">
+                                    <option disabled selected class="text-body capitalize">Pilih Divisi</option>
+                                    @foreach ($divisions as $division)
+                                        <option class="text-body capitalize"
+                                            value="{{ $report->division_id == $division->id ? $division->id : $division->id }}"
+                                            {{ $report->division_id == $division->id ? 'selected' : '' }}>
+                                            {{ $report->division_id == $division->id ? $division->name : $division->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            @endif
                         </div>
+                    </div>
 
-                        <button
-                            class="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray-dashboard hover:bg-opacity-90">
-                            Ubah disposisi
-                        </button>
-                    </form>
+                    <button
+                        class="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray-dashboard hover:bg-opacity-90">
+                        Ubah disposisi
+                    </button>
+                </form>
             </div>
         </div>
     </div>
