@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Report;
 use App\Models\Witness;
 use App\Models\Category;
+use App\Models\Division;
 use App\Models\Evidence;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ReportPostRequest;
+use App\Models\ReportDivision;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -145,17 +147,28 @@ class ReportController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $slug)
     {
-        //
+        $statuses = [
+            'diterima', 'ditolak', 'sedang diproses', 'selesai'
+        ];
+
+        $divisions = Division::all();
+
+        $report = Report::with('reportDivisions')->where('slug', $slug)->firstOrFail();
+        return view('components.pages.dashboard.reports.edit', compact('statuses', 'report', 'divisions'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Report $report)
     {
-        //
+        $report->status = $request->status;
+        $report->update();
+
+        Alert::toast('Berhasil ubah status', 'success');
+        return redirect()->route('adminisrator.reports.getAdminReportsList');
     }
 
     /**
@@ -188,8 +201,11 @@ class ReportController extends Controller
                         <a href="' . route('adminisrator.reports.getDetailedReport', $item->slug) . '">
                             Detail
                         </a>
-                        <a href="#">
+                        <a href="' . route('adminisrator.reports.edit', $item->slug) . '">
                             Edit
+                        </a>
+                        <a href="' . route('adminisrator.reports.disposisi.create', $item->slug) . '">
+                            Disposisi
                         </a>
                         <div>
                             <form action="' . route('adminisrator.reports.destroy', $item->id) . '" method="post">
@@ -225,5 +241,87 @@ class ReportController extends Controller
     {
         $witness = Witness::with('report')->where('id', $witnessId)->where('report_id', $reportId)->firstOrFail();
         return view('components.pages.dashboard.reports.detail-witness', compact('witness'));
+    }
+
+    public function createDisposisi(string $slug)
+    {
+        $divisions = Division::all();
+
+        $report = Report::where('slug', $slug)->firstOrFail();
+        return view('components.pages.dashboard.reports.create-disposisi', compact('report', 'divisions'));
+    }
+
+    public function storeDisposisi(Request $request, string $reportId)
+    {
+        // Validasi request
+        $request->validate([
+            'disposition' => 'required|array',
+            'disposition.*' => 'distinct' // Validasi bahwa setiap item dalam array harus unik
+        ], [
+            'disposition.*.distinct' => 'Tidak boleh disposisi yang sama.'
+        ]);
+
+        try {
+
+            DB::beginTransaction();
+
+            $report = Report::with('reportDivisions')->find($reportId);
+            foreach ($request->disposition as $key => $item) {
+                $report->reportDivisions()->create(
+                    [
+                        'division_id' => (int)$item
+                    ]
+                );
+            }
+
+            $report->status = "sedang diproses";
+            $report->save();
+
+            DB::commit();
+
+            Alert::toast('Sukses menambahkan disposisi', 'success');
+            return redirect()->route('adminisrator.reports.getAdminReportsList');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors(['error' => 'Gagal menambah disposisi: ' . $e->getMessage()]);
+        }
+    }
+    public function updateDisposisi(Request $request, string $reportId)
+    {
+        // Validasi request
+        $request->validate([
+            'reportDivisionId' => 'required|array',
+            'disposition' => 'required|array',
+            'disposition.*' => 'distinct' // Validasi bahwa setiap item dalam array harus unik
+        ], [
+            'disposition.*.distinct' => 'Tidak boleh disposisi yang sama.'
+        ]);
+
+        try {
+
+            DB::beginTransaction();
+
+            $report = Report::with('reportDivisions')->find($reportId);
+            foreach ($request->reportDivisionId as $key => $divisionId) {
+                $division = $report->reportDivisions->where('id', $divisionId)->first();
+
+                if ($division) {
+                    if (isset($request->disposition[$key])) {
+                        $division->update(['division_id' => (int)$request->disposition[$key]]);
+                    }
+                }
+            }
+
+            $report->status = "sedang diproses";
+            $report->update();
+
+            DB::commit();
+
+            Alert::toast('Sukses mengubah disposisi', 'success');
+            return redirect()->route('adminisrator.reports.getAdminReportsList');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors(['error' => 'Gagal mengubah disposisi: ' . $e->getMessage()]);
+        }
     }
 }

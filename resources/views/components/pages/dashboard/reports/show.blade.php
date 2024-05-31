@@ -112,7 +112,9 @@
                         Didisposisikan
                     </label>
                     <input type="text" disabled readonly
-                        value="{{ $report->reportDivisions()->exists() ? 'uhuy' : 'Belum didisposisikan' }}"
+                        value="@if ($report->reportDivisions()->exists()) {{ $report->reportDivisions->pluck('division.name')->implode(', ') }}
+              @else
+                 Belum didisposisikan @endif"
                         class="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black-dashboard outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white-dahsboard dark:focus:border-primary" />
                 </div>
 
