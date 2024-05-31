@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('reports', function (Blueprint $table) {
-            $table->unsignedInteger('category_id')->after('user_id')->nullable();
+            $table->unsignedInteger('category_id')->after('user_id')->nullable(false);
 
             $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
         });

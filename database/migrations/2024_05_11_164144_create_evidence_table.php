@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('evidence', function (Blueprint $table) {
+        Schema::create('evidences', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('report_id')->nullable(false);
             $table->string('url')->nullable(false);
             $table->string('title', 50)->nullable(false);
-            $table->text('description')->nullable(false);
+            $table->text('description')->nullable();
 
             $table->foreign('report_id')->references('id')->on('reports')->cascadeOnDelete();
         });
