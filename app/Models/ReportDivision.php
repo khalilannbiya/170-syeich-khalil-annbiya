@@ -12,6 +12,7 @@ class ReportDivision extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
     protected $fillable = ['report_id', 'division_id'];
 
     public function report(): BelongsTo

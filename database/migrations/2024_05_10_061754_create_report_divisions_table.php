@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('report_divisions', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('report_id')->nullable();
-            $table->unsignedInteger('division_id')->nullable();
+            $table->unsignedInteger('report_id');
+            $table->unsignedInteger('division_id');
+
+            $table->unique(['report_id', 'division_id']);
 
             $table->foreign('report_id')->references('id')->on('divisions')->cascadeOnDelete();
             $table->foreign('division_id')->references('id')->on('divisions')->cascadeOnDelete();
