@@ -79,6 +79,12 @@ You can also run the command "php artisan migrate --seed" to execute the seeders
   php artisan migrate --seed
 ```
 
+Please, dont forget to run this command
+
+```bash
+  php artisan storage:link
+```
+
 Install node_modules
 
 ```bash
