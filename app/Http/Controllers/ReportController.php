@@ -164,14 +164,19 @@ class ReportController extends Controller
      */
     public function update(Request $request, Report $report)
     {
-        $report->status = $request->status;
-        $report->update();
+        try {
+            DB::beginTransaction();
 
-        Alert::toast('Berhasil ubah status', 'success');
-        if (Auth::user()->role_id == 1) {
-            return redirect()->route('adminisrator.reports.getAdminReportsList');
-        } else {
-            return redirect()->route('departement.reports.getDepartementReportsList');
+            $report->status = $request->status;
+            $report->update();
+
+            DB::commit();
+
+            Alert::toast('Berhasil ubah status', 'success');
+            return redirect()->route(strtolower(auth()->user()->role->name) . '.reports' . (strtolower(auth()->user()->role->name) == 'adminisrator' ? '.getAdminReportsList' : '.getDepartementReportsList'));
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors(['error' => 'Gagal ubah status: ' . $e->getMessage()]);
         }
     }
 
@@ -212,9 +217,6 @@ class ReportController extends Controller
                         <a href="' . route('adminisrator.reports.edit', $item->slug) . '">
                             Edit
                         </a>
-                        <a href="' . route('adminisrator.reports.disposisi.create', $item->slug) . '">
-                            Disposisi
-                        </a>
                         <div>
                             <form action="' . route('adminisrator.reports.destroy', $item->id) . '" method="post">
                             ' . method_field('delete') . csrf_field() . '
@@ -251,39 +253,6 @@ class ReportController extends Controller
         return view('components.pages.dashboard.reports.detail-witness', compact('witness'));
     }
 
-    public function createDisposisi(string $slug)
-    {
-        $divisions = Division::all();
-
-        $report = Report::where('slug', $slug)->firstOrFail();
-        return view('components.pages.dashboard.reports.create-disposisi', compact('report', 'divisions'));
-    }
-
-    public function storeDisposisi(Request $request, string $reportId)
-    {
-        // Validasi request
-        $request->validate([
-            'disposition' => 'required',
-        ]);
-
-        try {
-
-            DB::beginTransaction();
-
-            $report = Report::with('division')->find($reportId);
-            $report->division_id = $request->disposition;
-            $report->status = "sedang diproses";
-            $report->save();
-
-            DB::commit();
-
-            Alert::toast('Sukses menambahkan disposisi', 'success');
-            return redirect()->route('adminisrator.reports.getAdminReportsList');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return back()->withErrors(['error' => 'Gagal menambah disposisi: ' . $e->getMessage()]);
-        }
-    }
     public function updateDisposisi(Request $request, string $reportId)
     {
         // Validasi request

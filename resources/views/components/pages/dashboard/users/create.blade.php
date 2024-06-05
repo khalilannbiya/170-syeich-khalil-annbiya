@@ -52,9 +52,12 @@
 
                     <div class="mb-4.5">
                         <label for="division_id"
-                            class="mb-3 block text-sm font-medium text-black-dashboard dark:text-white-dahsboard">
+                            class="mb-1 block text-sm font-medium text-black-dashboard dark:text-white-dahsboard">
                             Division
                         </label>
+                        <p class="text-xs mb-3 font-medium text-red-500">Jika role nya adalah Administrator, tidak usah
+                            isi
+                            divisi</p>
                         <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent dark:bg-form-input">
                             <select name="division_id"
                                 class="relative z-20 w-full appearance-none capitalize rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
