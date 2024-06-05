@@ -52,6 +52,9 @@ Route::middleware([
         );
         Route::get('reports/{reportId}/evidence/{evidenceId}', [ReportController::class, 'getDetailedEvidence'])->name('reports.getDetailedEvidence');
         Route::get('reports/{reportId}/witness/{witnessId}', [ReportController::class, 'getDetailedWitness'])->name('reports.getDetailedWitness');
+
+        Route::resource('users', UserController::class);
+
     });
 
     Route::middleware([
@@ -64,8 +67,6 @@ Route::middleware([
         Route::get('reports/{reportId}/evidence/{evidenceId}', [ReportController::class, 'getDetailedEvidence'])->name('reports.getDetailedEvidence');
         Route::get('reports/{reportId}/witness/{witnessId}', [ReportController::class, 'getDetailedWitness'])->name('reports.getDetailedWitness');
         Route::get('reports/{slug}/edit', [ReportController::class, 'edit'])->name('reports.edit');
-        Route::get('reports/{slug}/disposisi', [ReportController::class, 'createDisposisi'])->name('reports.disposisi.create');
-        Route::post('reports/{reportId}/disposisi', [ReportController::class, 'storeDisposisi'])->name('reports.disposisi.store');
         Route::put('reports/{reportId}/disposisi', [ReportController::class, 'updateDisposisi'])->name('reports.disposisi.update');
         Route::resource('reports', ReportController::class)->only(
             'destroy',

@@ -33,10 +33,13 @@
         <nav class="mb-5">
             <ol class="flex items-center gap-2">
                 <li>
-                    <a class="font-medium" href="{{ route('adminisrator.dashboard') }}">Dashboard /</a>
+                    <a class="font-medium"
+                        href="{{ route(strtolower(auth()->user()->role->name) . '.dashboard') }}">Dashboard /</a>
                 </li>
                 <li>
-                    <a class="font-medium" href="{{ route('adminisrator.reports.getAdminReportsList') }}">Laporan /</a>
+                    <a class="font-medium"
+                        href="{{ route(strtolower(auth()->user()->role->name) . '.reports' . (strtolower(auth()->user()->role->name) == 'adminisrator' ? '.getAdminReportsList' : '.getDepartementReportsList')) }}">Laporan
+                        /</a>
                 </li>
                 <li class="font-medium text-primary">Edit</li>
             </ol>
@@ -51,7 +54,8 @@
                 </h3>
             </div>
             <div class="p-6.5">
-                <form action="{{ route('adminisrator.reports.update', $report->id) }}" method="post">
+                <form action="{{ route(strtolower(auth()->user()->role->name . '.reports.update'), $report->id) }}"
+                    method="post">
                     @method('PUT')
                     @csrf
                     <div class="mb-4.5">
@@ -81,21 +85,21 @@
             </div>
         </div>
 
-        {{-- Change Disposition --}}
-        <div
-            class="rounded-sm border mt-10 border-stroke bg-white-dahsboard shadow-default dark:border-strokedark dark:bg-boxdark">
-            <div class="border-b border-stroke px-6.5 py-4 dark:border-strokedark">
-                <h3 class="font-semibold text-black-dashboard dark:text-white-dahsboard">
-                    Ubah disposisi
-                </h3>
-            </div>
-            <div class="p-6.5">
-                <form action="{{ route('adminisrator.reports.disposisi.update', $report->id) }}" method="post">
-                    @csrf
-                    @method('PUT')
-                    <div class="mb-4.5">
-                        <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent dark:bg-form-input">
-                            @if ($report->division()->exists())
+        @if (strtolower(auth()->user()->role->name) == 'adminisrator')
+            {{-- Change Disposition --}}
+            <div
+                class="rounded-sm border mt-10 border-stroke bg-white-dahsboard shadow-default dark:border-strokedark dark:bg-boxdark">
+                <div class="border-b border-stroke px-6.5 py-4 dark:border-strokedark">
+                    <h3 class="font-semibold text-black-dashboard dark:text-white-dahsboard">
+                        Ubah disposisi
+                    </h3>
+                </div>
+                <div class="p-6.5">
+                    <form action="{{ route('adminisrator.reports.disposisi.update', $report->id) }}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <div class="mb-4.5">
+                            <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent dark:bg-form-input">
                                 <select name="disposition"
                                     class="relative mb-3 z-20 w-full appearance-none capitalize rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                                     :class="isOptionSelected && 'text-black dark:text-white'"
@@ -109,16 +113,16 @@
                                         </option>
                                     @endforeach
                                 </select>
-                            @endif
+                            </div>
                         </div>
-                    </div>
 
-                    <button
-                        class="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray-dashboard hover:bg-opacity-90">
-                        Ubah disposisi
-                    </button>
-                </form>
+                        <button
+                            class="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray-dashboard hover:bg-opacity-90">
+                            Ubah disposisi
+                        </button>
+                    </form>
+                </div>
             </div>
-        </div>
+        @endif
     </div>
 </x-layouts.dashboard>

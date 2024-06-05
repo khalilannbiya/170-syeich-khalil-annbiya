@@ -6,14 +6,17 @@
         <nav class="mb-5">
             <ol class="flex items-center gap-2">
                 <li>
-                    <a class="font-medium" href="{{ route('adminisrator.dashboard') }}">Dashboard /</a>
-                </li>
-                <li>
-                    <a class="font-medium" href="{{ route('adminisrator.reports.getAdminReportsList') }}">Laporan /</a>
+                    <a class="font-medium"
+                        href="{{ route(strtolower(auth()->user()->role->name) . '.dashboard') }}">Dashboard /</a>
                 </li>
                 <li>
                     <a class="font-medium"
-                        href="{{ route('adminisrator.reports.getDetailedReport', $witness->report->slug) }}">Detail
+                        href="{{ route(strtolower(auth()->user()->role->name) . '.reports' . (strtolower(auth()->user()->role->name) == 'adminisrator' ? '.getAdminReportsList' : '.getDepartementReportsList')) }}">Laporan
+                        /</a>
+                </li>
+                <li>
+                    <a class="font-medium"
+                        href="{{ route(strtolower(auth()->user()->role->name) . '.reports.getDetailedReport', $witness->report->slug) }}">Detail
                         /</a>
                 </li>
                 <li class="font-medium text-primary">Detail Saksi</li>

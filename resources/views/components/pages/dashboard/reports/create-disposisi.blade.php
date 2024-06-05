@@ -60,11 +60,14 @@
                                 :class="isOptionSelected && 'text-black dark:text-white'"
                                 @change="isOptionSelected = true">
                                 <option disabled selected class="text-body capitalize">Pilih Divisi</option>
-                                @foreach ($divisions as $division)
-                                    <option class="text-body capitalize" value="{{ $division->id }}">
+                                @forelse ($divisions as $division)
+                                    <option class="text-body capitalize" value="{{ $division->id }}"
+                                        {{ old('disposition') == $division->id ? 'selected' : '' }}>
                                         {{ $division->name }}
                                     </option>
-                                @endforeach
+                                @empty
+                                    <option disabled>Belum ada kategori</option>
+                                @endforelse
                             </select>
                         </div>
                     </div>
