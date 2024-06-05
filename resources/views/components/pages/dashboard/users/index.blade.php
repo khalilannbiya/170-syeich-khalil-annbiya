@@ -6,7 +6,8 @@
         <nav class="mb-5">
             <ol class="flex items-center gap-2">
                 <li>
-                    <a class="font-medium" href="{{ route('adminisrator.dashboard') }}">Dashboard /</a>
+                    <a class="font-medium"
+                        href="{{ route(strtolower(auth()->user()->role->name) . '.dashboard') }}">Dashboard /</a>
                 </li>
                 <li class="font-medium text-primary">Data Pelapor</li>
             </ol>

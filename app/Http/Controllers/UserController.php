@@ -23,22 +23,31 @@ class UserController extends Controller
             $users = User::where('role_id', 3)->latest();
             return DataTables::of($users)
                 ->addColumn('action', function ($item) {
-                    return '
+                    $roleName = strtolower(auth()->user()->role->name);
+                    $showUrl = route("{$roleName}.users.show", $item->id);
+                    $editUrl = route("{$roleName}.users.edit", $item->id);
+                    $deleteUrl = route("{$roleName}.users.destroy", $item->id);
+
+                    $editLink = strtolower(auth()->user()->role->name) == 'adminisrator' ? "<a href='{$editUrl}'>Edit</a>" : "";
+
+                    return sprintf(
+                        '
                     <div class="wrapper-action">
-                        <a href="' . route('adminisrator.users.show', $item->id) . '">
-                            Detail
-                        </a>
-                        <a href="' . route('adminisrator.users.edit', $item->id) . '">
-                            Edit
-                        </a>
+                        <a href="%s">Detail</a>
+                        %s
                         <div>
-                            <form action="' . route('adminisrator.users.destroy', $item->id) . '" method="post">
-                            ' . method_field('delete') . csrf_field() . '
-                            <button type="submit">Hapus</button>
+                            <form action="%s" method="post">
+                                %s %s
+                                <button type="submit">Hapus</button>
                             </form>
                         </div>
-                    </div>
-                ';
+                    </div>',
+                        $showUrl,
+                        $editLink,
+                        $deleteUrl,
+                        method_field('delete'),
+                        csrf_field()
+                    );
                 })
                 ->make();
         }
@@ -51,7 +60,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
+        $roles = Role::where('name', '!=', 'Reporter')->get();
         $divisions = Division::all();
         return view('components.pages.dashboard.users.create', compact('roles', 'divisions'));
     }
@@ -72,7 +81,7 @@ class UserController extends Controller
             'nik' => ['string', 'max:16', 'min:16', 'regex:/^[0-9]+$/']
         ]);
 
-        $user = User::create([
+        User::create([
             'role_id' => $request->role_id,
             'division_id' => $request->division_id,
             'name' => $request->name,
@@ -184,7 +193,7 @@ class UserController extends Controller
 
     public function editOfficer(User $user)
     {
-        $roles = Role::all();
+        $roles = Role::where('name', '!=', 'Reporter')->get();
         $divisions = Division::all();
         return view('components.pages.dashboard.users.officer-edit', compact('user', 'roles', 'divisions'));
     }
