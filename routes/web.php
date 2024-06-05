@@ -54,6 +54,7 @@ Route::middleware([
         Route::get('reports/{reportId}/witness/{witnessId}', [ReportController::class, 'getDetailedWitness'])->name('reports.getDetailedWitness');
 
         Route::resource('users', UserController::class);
+
     });
 
     Route::middleware([

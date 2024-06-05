@@ -239,7 +239,6 @@
 
                                     <a href="{{ route(strtolower(auth()->user()->role->name) . '.reports' . '.getDetailedEvidence', [$item->report_id, $item->id]) }}"
                                         class="mt-4 cursor-pointer text-deep-koamaru-600">Lihat
-                                        detail...</a>
                                 </article>
                             @endforeach
                         @else
