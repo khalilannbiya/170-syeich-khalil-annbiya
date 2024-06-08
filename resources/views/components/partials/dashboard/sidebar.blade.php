@@ -63,7 +63,7 @@
 
                         <a class="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark-dashboard dark:hover:bg-meta-4 {{ Route::current()->getName() == $routeName ? 'bg-graydark-dashboard dark:bg-meta-4' : '' }}"
                             href="{{ route($routeName) }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                                 style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
                                 <path
                                     d="m20 8-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM9 19H7v-9h2v9zm4 0h-2v-6h2v6zm4 0h-2v-3h2v3zM14 9h-1V4l5 5h-4z">
@@ -240,6 +240,20 @@
                             </a>
                         </li>
                         <!-- Menu Item Profile -->
+
+                        <li>
+                            <a class="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark-dashboard dark:hover:bg-meta-4 {{ Route::current()->getName() == 'adminisrator.divisions.index' ? 'bg-graydark-dashboard dark:bg-meta-4' : '' }}"
+                                href="{{ route('adminisrator.divisions.index') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
+                                    <path
+                                        d="M20 13.01h-7V10h1c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2h-4c-1.103 0-2 .897-2 2v4c0 1.103.897 2 2 2h1v3.01H4V18H3v4h4v-4H6v-2.99h5V18h-1v4h4v-4h-1v-2.99h5V18h-1v4h4v-4h-1v-4.99zM10 8V4h4l.002 4H10z">
+                                    </path>
+                                </svg>
+
+                                Data Divisi
+                            </a>
+                        </li>
                     @endif
 
                     <!-- Menu Item Forms -->
