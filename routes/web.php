@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\DashboardController;
 
@@ -78,6 +79,8 @@ Route::middleware([
         Route::get('users/{user}/officer/edit', [UserController::class, 'editOfficer'])->name('users.officer.editOfficer');
         Route::put('users/{id}/officer', [UserController::class, 'updateOfficer'])->name('users.officer.updateOfficer');
         Route::resource('users', UserController::class);
+
+        Route::resource('divisions', DivisionController::class);
     });
 });
 

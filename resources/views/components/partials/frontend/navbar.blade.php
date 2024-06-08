@@ -15,6 +15,13 @@
                         class="transition-all duration-500 md:text-lg lg:text-sm {{ Route::current()->getName() == 'index' ? 'text-deep-koamaru-900 lg:text-deep-koamaru-900' : 'text-black hover:text-deep-koamaru-900 lg:text-black lg:hover:text-deep-koamaru-900' }}">Beranda</a>
                 </li>
 
+                @if (auth()->check() && (auth()->user()->role->name == 'Adminisrator' || auth()->user()->role->name == 'Departement'))
+                    <li>
+                        <a href="{{ route(strtolower(auth()->user()->role->name) . '.dashboard') }}"
+                            class="transition-all duration-500 md:text-lg lg:text-sm">Dashboard</a>
+                    </li>
+                @endif
+
                 {{-- if user is reporter --}}
                 @if (auth()->check() && auth()->user()->role->name == 'Reporter')
                     <li>
