@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\DashboardController;
@@ -56,6 +57,7 @@ Route::middleware([
 
         Route::resource('users', UserController::class);
 
+        Route::get('categories', [CategoryController::class, 'getDataCategoryForDepatement'])->name('categories.index');
     });
 
     Route::middleware([
@@ -81,6 +83,10 @@ Route::middleware([
         Route::resource('users', UserController::class);
 
         Route::resource('divisions', DivisionController::class);
+
+        Route::resource('categories', CategoryController::class)->except([
+            'show'
+        ]);
     });
 });
 
